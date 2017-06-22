@@ -1,12 +1,11 @@
 /* tslint:disable */
 import { Injectable } from '@angular/core';
 import { User } from '../../models/User';
-import { Rubro } from '../../models/Rubro';
-import { Pedidoventadetalle } from '../../models/Pedidoventadetalle';
-import { Pedidoventa } from '../../models/Pedidoventa';
-import { Domicilio } from '../../models/Domicilio';
-import { Cliente } from '../../models/Cliente';
 import { Articulo } from '../../models/Articulo';
+import { Cliente } from '../../models/Cliente';
+import { Pedidoventa } from '../../models/Pedidoventa';
+import { Pedidoventadetalle } from '../../models/Pedidoventadetalle';
+import { Rubro } from '../../models/Rubro';
 import { Usuario } from '../../models/Usuario';
 
 export interface Models { [name: string]: any }
@@ -16,12 +15,11 @@ export class SDKModels {
 
   private models: Models = {
     User: User,
-    Rubro: Rubro,
-    Pedidoventadetalle: Pedidoventadetalle,
-    Pedidoventa: Pedidoventa,
-    Domicilio: Domicilio,
-    Cliente: Cliente,
     Articulo: Articulo,
+    Cliente: Cliente,
+    Pedidoventa: Pedidoventa,
+    Pedidoventadetalle: Pedidoventadetalle,
+    Rubro: Rubro,
     Usuario: Usuario,
     
   };

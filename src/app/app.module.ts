@@ -13,18 +13,19 @@ import { MenuLateralComponenteComponent } from './menu-lateral-componente/menu-l
 import { FooterComponenteComponent } from './footer-componente/footer-componente.component';
 import { ContenidoComponenteComponent } from './contenido-componente/contenido-componente.component';
 
-//COMPONENTE PRIMENG
+//ADICION
 import { DataTableModule, InputTextareaModule, PanelModule, DropdownModule, ButtonModule, DialogModule, ConfirmationService, ConfirmDialogModule, SharedModule, EditorModule, FileUploadModule, MenuItem, MenuModule } from 'primeng/primeng';
 
 //COMPONENTES SISTEMA
 import { ListaClientes } from './lista-clientes/lista-clientes.component';
+import { FormularioCliente } from './formulario-cliente/formulario-cliente.component';
+import { ListaPedidoVenta } from './lista-pedido-venta/lista-pedido-venta.component';
 
 //SERVICIOS
 import { ClienteService } from './shared/services/cliente.service'
 
 //
 import { SDKBrowserModule } from './shared/services/lbsdk/index';
-import { FormularioClienteComponent } from './formulario-cliente/formulario-cliente.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { FormularioClienteComponent } from './formulario-cliente/formulario-clie
     FooterComponenteComponent,
     ContenidoComponenteComponent,
     ListaClientes,
-    FormularioClienteComponent,
+    FormularioCliente,
+    ListaPedidoVenta,
   ],
   imports: [
     BrowserModule,

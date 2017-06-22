@@ -2,7 +2,7 @@
 
 declare var Object: any;
 export interface RubroInterface {
-  "idrubro"?: number;
+  "idrubro": number;
   "idrubropadre"?: number;
   "codigo"?: number;
   "denominacion"?: string;

@@ -2,7 +2,7 @@
 
 declare var Object: any;
 export interface UsuarioInterface {
-  "idusuario"?: number;
+  "idusuario": number;
   "username": string;
   "password": string;
 }

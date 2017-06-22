@@ -1,3 +1,63 @@
-<p>
-  formulario-cliente works!
-</p>
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h1>Formulario Cliente</h1>
+    <form [formGroup]="formularioCliente" novalidate class="form-group">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="razonsocial">Razon social</label>
+            <input formControlName="razonsocial" type="text" id="razonsocial" class="form-control" [(ngModel)]="cliente.razonsocial">
+            <div *ngIf="formularioCliente.get('razonsocial').errors && formularioCliente.get('razonsocial').dirty" class="alert alert-danger">
+              <p *ngIf="formularioCliente.get('razonsocial').hasError('required')">Este campo es obligatorio</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="cuit">Cuit</label>
+            <input formControlName="cuit" type="number" id="cuit" class="form-control" [(ngModel)]="cliente.cuit">
+            <div *ngIf="formularioCliente.get('cuit').errors && formularioCliente.get('cuit').dirty" class="alert alert-danger">
+              <p *ngIf="formularioCliente.get('cuit').hasError('required')">Este campo es obligatorio</p>
+              <p *ngIf="formularioCliente.get('cuit').hasError('pattern') || formularioCliente.get('cuit').hasError('maxlength')">Ingrese un cuit válido</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="calle">Calle</label>
+            <input formControlName="calle" type="text" id="calle" class="form-control" [(ngModel)]="cliente.calle">
+            <div *ngIf="formularioCliente.get('calle').errors && formularioCliente.get('calle').dirty" class="alert alert-danger">
+              <p *ngIf="formularioCliente.get('calle').hasError('required')">Este campo es obligatorio</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="numero">Numero</label>
+            <input formControlName="numero" type="number" id="numero" class="form-control" [(ngModel)]="cliente.numero">
+            <div *ngIf="formularioCliente.get('numero').errors && formularioCliente.get('numero').dirty" class="alert alert-danger">
+              <p *ngIf="formularioCliente.get('numero').hasError('required')">Este campo es obligatorio</p>
+              <p *ngIf="formularioCliente.get('numero').hasError('pattern') || formularioCliente.get('numero').hasError('maxlength')">Ingrese un numero válido</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="localidad">Localidad</label>
+            <input formControlName="localidad" type="text" id="localidad" class="form-control" [(ngModel)]="cliente.localidad">
+            <div *ngIf="formularioCliente.get('localidad').errors && formularioCliente.get('localidad').dirty" class="alert alert-danger">
+              <p *ngIf="formularioCliente.get('localidad').hasError('required')">Este campo es obligatorio</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="ui-helper-clearfix" style="width:100%">
+        <button type="submit" class="btn btn-success btn-lg" style="float: right;" [disabled]="formularioCliente.invalid" (click)="save()">Guardar</button>
+        <button type="submit" class="btn btn-success btn-lg" style="float: right; margin-right: 10px" (click)="volver()">Regresar</button>
+      </div>
+    </form>
+  </div>
+</div>

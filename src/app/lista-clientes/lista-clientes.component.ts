@@ -10,7 +10,6 @@ import { ClienteService, Cliente, LoggerService } from '../shared/services/index
 export class ListaClientes implements OnInit {
 
   listaCliente: Cliente[];
-
   constructor(private clienteService: ClienteService, private log: LoggerService, private router: Router) { }
 
   ngOnInit() {
@@ -27,8 +26,7 @@ export class ListaClientes implements OnInit {
     let cliente: Cliente = new Cliente();
     cliente.idcliente = -1;
     this.clienteService.clienteActual = cliente;
-
-    this.router.navigate(['cliente']);
+    this.router.navigate(['formularioCliente']);
   }
   delete() {
     if (this.clienteService.esClienteExistente()) {
@@ -42,5 +40,14 @@ export class ListaClientes implements OnInit {
 
   onRowSelect(event) {
     this.clienteService.clienteActual = <Cliente>event.data;
+  }
+
+
+  pedidoVenta(){
+    if (this.clienteService.esClienteExistente()) {
+      this.router.navigate(['listaPedidoVenta']);
+    } else {
+      alert("Seleccionar un cliente!");
+    }
   }
 }

@@ -2,11 +2,13 @@
 
 declare var Object: any;
 export interface ClienteInterface {
-  "idcliente"?: number;
+  "idcliente": number;
   "razonsocial"?: string;
   "cuit"?: number;
   "saldo"?: number;
-  "fkdomicilio"?: number;
+  "calle"?: string;
+  "numero"?: string;
+  "localidad"?: string;
 }
 
 export class Cliente implements ClienteInterface {
@@ -14,7 +16,9 @@ export class Cliente implements ClienteInterface {
   "razonsocial": string;
   "cuit": number;
   "saldo": number;
-  "fkdomicilio": number;
+  "calle": string;
+  "numero": string;
+  "localidad": string;
   constructor(data?: ClienteInterface) {
     Object.assign(this, data);
   }
@@ -62,9 +66,17 @@ export class Cliente implements ClienteInterface {
           name: 'saldo',
           type: 'number'
         },
-        "fkdomicilio": {
-          name: 'fkdomicilio',
-          type: 'number'
+        "calle": {
+          name: 'calle',
+          type: 'string'
+        },
+        "numero": {
+          name: 'numero',
+          type: 'string'
+        },
+        "localidad": {
+          name: 'localidad',
+          type: 'string'
         },
       },
       relations: {

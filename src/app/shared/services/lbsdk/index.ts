@@ -49,12 +49,11 @@ import { SocketDriver } from './sockets/socket.driver';
 import { SocketConnection } from './sockets/socket.connections';
 import { RealTime } from './services/core/real.time';
 import { UserApi } from './services/custom/User';
-import { RubroApi } from './services/custom/Rubro';
-import { PedidoventadetalleApi } from './services/custom/Pedidoventadetalle';
-import { PedidoventaApi } from './services/custom/Pedidoventa';
-import { DomicilioApi } from './services/custom/Domicilio';
-import { ClienteApi } from './services/custom/Cliente';
 import { ArticuloApi } from './services/custom/Articulo';
+import { ClienteApi } from './services/custom/Cliente';
+import { PedidoventaApi } from './services/custom/Pedidoventa';
+import { PedidoventadetalleApi } from './services/custom/Pedidoventadetalle';
+import { RubroApi } from './services/custom/Rubro';
 import { UsuarioApi } from './services/custom/Usuario';
 /**
 * @module SDKBrowserModule
@@ -88,12 +87,11 @@ export class SDKBrowserModule {
         SDKModels,
         RealTime,
         UserApi,
-        RubroApi,
-        PedidoventadetalleApi,
-        PedidoventaApi,
-        DomicilioApi,
-        ClienteApi,
         ArticuloApi,
+        ClienteApi,
+        PedidoventaApi,
+        PedidoventadetalleApi,
+        RubroApi,
         UsuarioApi,
         internalStorageProvider,
         { provide: SDKStorage, useClass: StorageBrowser },

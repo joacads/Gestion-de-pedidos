@@ -2,7 +2,7 @@
 
 declare var Object: any;
 export interface ArticuloInterface {
-  "idarticulo"?: number;
+  "idarticulo": number;
   "denominacion": string;
   "codigo": number;
   "preciocompra": number;

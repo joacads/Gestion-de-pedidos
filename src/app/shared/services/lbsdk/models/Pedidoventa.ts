@@ -2,7 +2,7 @@
 
 declare var Object: any;
 export interface PedidoventaInterface {
-  "idpedidoventa"?: number;
+  "idpedidoventa": number;
   "fechaentrega"?: Date;
   "gastosenvio"?: number;
   "estado"?: string;
@@ -12,7 +12,11 @@ export interface PedidoventaInterface {
   "subtotal"?: number;
   "montototal"?: number;
   "fkcliente"?: number;
-  "fkdomicilio"?: number;
+  "calle"?: string;
+  "numero"?: string;
+  "localidad"?: string;
+  "latitud"?: number;
+  "longitud"?: number;
 }
 
 export class Pedidoventa implements PedidoventaInterface {
@@ -26,7 +30,11 @@ export class Pedidoventa implements PedidoventaInterface {
   "subtotal": number;
   "montototal": number;
   "fkcliente": number;
-  "fkdomicilio": number;
+  "calle": string;
+  "numero": string;
+  "localidad": string;
+  "latitud": number;
+  "longitud": number;
   constructor(data?: PedidoventaInterface) {
     Object.assign(this, data);
   }
@@ -98,8 +106,24 @@ export class Pedidoventa implements PedidoventaInterface {
           name: 'fkcliente',
           type: 'number'
         },
-        "fkdomicilio": {
-          name: 'fkdomicilio',
+        "calle": {
+          name: 'calle',
+          type: 'string'
+        },
+        "numero": {
+          name: 'numero',
+          type: 'string'
+        },
+        "localidad": {
+          name: 'localidad',
+          type: 'string'
+        },
+        "latitud": {
+          name: 'latitud',
+          type: 'number'
+        },
+        "longitud": {
+          name: 'longitud',
           type: 'number'
         },
       },
