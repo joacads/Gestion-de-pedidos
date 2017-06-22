@@ -22,6 +22,10 @@ import { ListaClientes } from './lista-clientes/lista-clientes.component';
 //SERVICIOS
 import { ClienteService } from './shared/services/cliente.service'
 
+//
+import { SDKBrowserModule } from './shared/services/lbsdk/index';
+import { FormularioClienteComponent } from './formulario-cliente/formulario-cliente.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +34,7 @@ import { ClienteService } from './shared/services/cliente.service'
     FooterComponenteComponent,
     ContenidoComponenteComponent,
     ListaClientes,
+    FormularioClienteComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +53,7 @@ import { ClienteService } from './shared/services/cliente.service'
     BrowserAnimationsModule,
     ConfirmDialogModule,
     MenuModule,
-    //SDKBrowserModule.forRoot()
+    SDKBrowserModule.forRoot()
   ],
   providers: [
     ConfirmationService,

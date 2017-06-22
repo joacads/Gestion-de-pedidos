@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-//import { LoopBackConfig } from './shared/services/lbsdk/index';
+import { LoopBackConfig } from './shared/services/lbsdk/index';
 
 @Component({
   selector: 'app-root',
