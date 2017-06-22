@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+//CUERPO TEMPLATE
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponenteComponent } from './header-componente/header-componente.component';
@@ -12,7 +13,14 @@ import { MenuLateralComponenteComponent } from './menu-lateral-componente/menu-l
 import { FooterComponenteComponent } from './footer-componente/footer-componente.component';
 import { ContenidoComponenteComponent } from './contenido-componente/contenido-componente.component';
 
+//COMPONENTE PRIMENG
 import { DataTableModule, InputTextareaModule, PanelModule, DropdownModule, ButtonModule, DialogModule, ConfirmationService, ConfirmDialogModule, SharedModule, EditorModule, FileUploadModule, MenuItem, MenuModule } from 'primeng/primeng';
+
+//COMPONENTES SISTEMA
+import { ListaClientes } from './lista-clientes/lista-clientes.component';
+
+//SERVICIOS
+import { ClienteService } from './shared/services/cliente.service'
 
 @NgModule({
   declarations: [
@@ -21,6 +29,7 @@ import { DataTableModule, InputTextareaModule, PanelModule, DropdownModule, Butt
     MenuLateralComponenteComponent,
     FooterComponenteComponent,
     ContenidoComponenteComponent,
+    ListaClientes,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +52,7 @@ import { DataTableModule, InputTextareaModule, PanelModule, DropdownModule, Butt
   ],
   providers: [
     ConfirmationService,
+    ClienteService,
   ],
   bootstrap: [AppComponent]
 })
