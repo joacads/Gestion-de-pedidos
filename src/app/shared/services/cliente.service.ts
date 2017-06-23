@@ -1,30 +1,34 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Cliente, ClienteApi, LoopBackConfig } from './lbsdk/index';
+import { Cliente, ClienteApi, Domicilio, LoopBackConfig } from './lbsdk/index';
 import { API_VERSION, BASE_URL } from '../services/lb.base.url';
+import "rxjs/add/operator/mergeMap";
 
 @Injectable()
 export class ClienteService {
 
   public clienteActual: Cliente = new Cliente();
+  public inludedObject: any = { include: 'domicilio' };
 
   constructor(private clienteApi: ClienteApi) {
     LoopBackConfig.setBaseURL(BASE_URL);
     LoopBackConfig.setApiVersion(API_VERSION);
-
     //cliente no seleccionado
     this.clienteActual.idcliente = -1;
+    this.clienteActual.domicilio = new Domicilio();
+    this.clienteActual.domicilio.iddomicilio = -1;
   }
 
   getAll(): Observable<Cliente[]> {
-    return this.clienteApi.find();
+    return this.clienteApi.find(this.inludedObject);
   }
 
   getClienteById(id: number): Observable<Cliente> {
-    return this.clienteApi.findById(id);
+    return this.clienteApi.findById(id, this.inludedObject);
   }
 
   create(cliente: Cliente): Observable<Cliente> {
+    cliente.idcliente = null;
     return this.clienteApi.create(cliente);
   }
 

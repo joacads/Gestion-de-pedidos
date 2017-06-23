@@ -11,11 +11,6 @@ import { ClienteService, Cliente, DomicilioService, Domicilio, LoggerService } f
 })
 export class FormularioCliente implements OnInit {
 
-  cliente: Cliente;
-  clienteAux: Cliente;
-  domicilio: Domicilio;
-  domicilioAux: Domicilio;
-
   formularioCliente: FormGroup;
 
   constructor(public fb: FormBuilder, private clienteServices: ClienteService, private domicilioService: DomicilioService, private router: Router, private activatedRoute: ActivatedRoute) {
@@ -26,31 +21,29 @@ export class FormularioCliente implements OnInit {
       'numero': ['', [Validators.required, Validators.pattern(/\d{1}/)]],
       'localidad': ['', [Validators.required,]],
     });
-    this.cliente = this.clienteServices.clienteActual;
-    this.clienteAux = new Cliente();
-    this.domicilio = new Domicilio();
-    this.domicilioAux = new Domicilio();
   }
   ngOnInit() {
+    if(!this.clienteServices.clienteActual.domicilio){
+      this.clienteServices.clienteActual.domicilio = new Domicilio({iddomicilio:-1});
+    }
   }
 
   volver() {
     this.router.navigate(['listaClientes']);
   }
   save() {
-    if (this.cliente.idcliente == -1) {
-      this.cliente.idcliente = this.clienteAux.idcliente;
-      this.domicilioService.create(this.domicilio)
+    if (this.clienteServices.clienteActual.idcliente == -1) {
+      this.domicilioService.create(this.clienteServices.clienteActual.domicilio)
         .flatMap((domicilioNuevo: Domicilio) => {
-          this.cliente.iddomicilio = domicilioNuevo.iddomicilio;
-          return this.clienteServices.create(this.cliente)
+          this.clienteServices.clienteActual.iddomicilio = domicilioNuevo.iddomicilio;
+          return this.clienteServices.create(this.clienteServices.clienteActual)
         })
         .subscribe((clienteNuevo: Cliente) => {
+          this.clienteServices.clienteActual.idcliente = clienteNuevo.idcliente;
           this.router.navigate(['listaClientes']);
         })
-
     } else {
-      this.clienteServices.update(this.cliente)
+      this.clienteServices.update(this.clienteServices.clienteActual)
         .subscribe((cliente: Cliente) => {
           this.router.navigate(['listaClientes']);
         })
