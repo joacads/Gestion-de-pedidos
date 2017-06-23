@@ -12,6 +12,7 @@ import { ClienteService, Cliente, DomicilioService, Domicilio, LoggerService } f
 export class FormularioCliente implements OnInit {
 
   formularioCliente: FormGroup;
+  cliente: Cliente;
 
   constructor(public fb: FormBuilder, private clienteServices: ClienteService, private domicilioService: DomicilioService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.formularioCliente = this.fb.group({
@@ -21,6 +22,7 @@ export class FormularioCliente implements OnInit {
       'numero': ['', [Validators.required, Validators.pattern(/\d{1}/)]],
       'localidad': ['', [Validators.required,]],
     });
+    this.cliente = new Cliente();
   }
   ngOnInit() {
     if (!this.clienteServices.clienteActual.domicilio) {
@@ -33,6 +35,7 @@ export class FormularioCliente implements OnInit {
   }
   save() {
     if (this.clienteServices.clienteActual.idcliente == null) {
+      this.clienteServices.clienteActual.idcliente = this.cliente.idcliente;
       this.domicilioService.create(this.clienteServices.clienteActual.domicilio)
         .flatMap((domicilioNuevo: Domicilio) => {
           this.clienteServices.clienteActual.iddomicilio = domicilioNuevo.iddomicilio;
