@@ -1,11 +1,12 @@
 <div class="box box-primary">
   <div class="box-header with-border">
 
-    <h2>Lista de Pedidos de venta</h2>
+    <h2>Lista de Pedidos de venta: <strong>{{cliente.razonsocial}}</strong></h2>
 
     <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
       <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
       <input #gb type="text" pInputText size="50" placeholder="Buscar">
+      <label for=""></label>
     </div>
 
     <p-dataTable [value]="listaPedidoVenta" selectionMode="single" sortMode="single" reorderableColumns="true" [globalFilter]="gb"
@@ -17,8 +18,7 @@
           <button type="button" pButton icon="fa-plus" style="float:left" (click)="agregar()" label="Nuevo"></button>
           <button type="button" pButton icon="fa-edit" style="float:left" (click)="editar()" label="Modificar"></button>
           <button type="button" pButton icon="fa-remove" style="float:left" (click)="delete()" label="Eliminar"></button>
-          <button type="button" pButton icon="fa-file-text-o" style="float:right" (click)="pedidoVenta()" label="Pedido de ventas"></button>
-
+          <button type="button" pButton icon="fa-reply" style="float:right" (click)="volver()" label="Regresar"></button>
         </div>
       </p-header>
 

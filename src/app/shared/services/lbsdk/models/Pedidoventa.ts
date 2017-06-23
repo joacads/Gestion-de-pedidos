@@ -2,7 +2,7 @@
 
 declare var Object: any;
 export interface PedidoventaInterface {
-  "idpedidoventa": number;
+  "idpedidoventa"?: number;
   "fechaentrega"?: Date;
   "gastosenvio"?: number;
   "estado"?: string;

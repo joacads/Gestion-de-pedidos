@@ -2,7 +2,7 @@
 
 declare var Object: any;
 export interface PedidoventadetalleInterface {
-  "idpedidoventadetalle": number;
+  "idpedidoventadetalle"?: number;
   "cantidad"?: number;
   "subtotal"?: number;
   "porcentajedescuento"?: number;

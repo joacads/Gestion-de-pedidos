@@ -28,6 +28,13 @@ export class ListaClientes implements OnInit {
     this.clienteService.clienteActual = cliente;
     this.router.navigate(['formularioCliente']);
   }
+  editar() {
+    if (this.clienteService.esClienteExistente()) {
+      this.router.navigate(['formularioCliente']);
+    } else {
+      alert("Seleccionar un cliente!");
+    }
+  }
   delete() {
     if (this.clienteService.esClienteExistente()) {
       this.clienteService.delete(this.clienteService.clienteActual).subscribe(() => {
@@ -42,8 +49,7 @@ export class ListaClientes implements OnInit {
     this.clienteService.clienteActual = <Cliente>event.data;
   }
 
-
-  pedidoVenta(){
+  pedidoVenta() {
     if (this.clienteService.esClienteExistente()) {
       this.router.navigate(['listaPedidoVenta']);
     } else {

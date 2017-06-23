@@ -20,9 +20,17 @@ import { DataTableModule, InputTextareaModule, PanelModule, DropdownModule, Butt
 import { ListaClientes } from './lista-clientes/lista-clientes.component';
 import { FormularioCliente } from './formulario-cliente/formulario-cliente.component';
 import { ListaPedidoVenta } from './lista-pedido-venta/lista-pedido-venta.component';
+import { FormularioPedidoVenta } from './formulario-pedido-venta/formulario-pedido-venta.component';
+import { ListaArticulos } from './lista-articulos/lista-articulos.component';
+import { FormularioArticulo } from './formulario-articulo/formulario-articulo.component';
+import { ListaRubros } from './lista-rubros/lista-rubros.component';
+import { FormularioRubro } from './formulario-rubro/formulario-rubro.component';
 
 //SERVICIOS
 import { ClienteService } from './shared/services/cliente.service'
+import { PedidoVentaService } from './shared/services/pedido-venta.service'
+import { ArticuloService } from './shared/services/articulo.service'
+import { RubroService } from './shared/services/rubro.service';
 
 //
 import { SDKBrowserModule } from './shared/services/lbsdk/index';
@@ -37,6 +45,11 @@ import { SDKBrowserModule } from './shared/services/lbsdk/index';
     ListaClientes,
     FormularioCliente,
     ListaPedidoVenta,
+    FormularioPedidoVenta,
+    ListaArticulos,
+    FormularioArticulo,
+    ListaRubros,
+    FormularioRubro,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +73,9 @@ import { SDKBrowserModule } from './shared/services/lbsdk/index';
   providers: [
     ConfirmationService,
     ClienteService,
+    PedidoVentaService,
+    ArticuloService,
+    RubroService
   ],
   bootstrap: [AppComponent]
 })

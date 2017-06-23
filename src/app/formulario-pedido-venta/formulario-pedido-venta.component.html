@@ -1,0 +1,114 @@
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h1>Formulario pedido venta</h1>
+    <form [formGroup]="formularioPedidoVenta" novalidate class="form-group">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="fechaentrega">Fecha de entrega</label>
+            <input formControlName="fechaentrega" type="date" id="fechaentrega" class="form-control" [(ngModel)]="pedidoventa.fechaentrega">
+            <div *ngIf="formularioPedidoVenta.get('fechaentrega').errors && formularioPedidoVenta.get('fechaentrega').dirty" class="alert alert-danger">
+              <p *ngIf="formularioPedidoVenta.get('fechaentrega').hasError('required')">Este campo es obligatorio</p>
+              <p *ngIf="formularioPedidoVenta.get('fechaentrega').hasError('pattern')">Ingrese una fecha válida</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="fechapedido">Fecha de pedido</label>
+            <input formControlName="fechapedido" type="date" id="fechapedido" class="form-control" [(ngModel)]="pedidoventa.fechapedido">
+            <div *ngIf="formularioPedidoVenta.get('fechapedido').errors && formularioPedidoVenta.get('fechapedido').dirty" class="alert alert-danger">
+              <p *ngIf="formularioPedidoVenta.get('fechapedido').hasError('required')">Este campo es obligatorio</p>
+              <p *ngIf="formularioPedidoVenta.get('fechapedido').hasError('pattern')">Ingrese una fecha válida</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="estado">Estado</label>
+            <select formControlName="estado" id="estado" class="form-control" [(ngModel)]="pedidoventa.estado">
+              <option *ngFor="let estado of opcionEstado" [value]="estado">{{estado}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="entregado">Entregado</label>
+            <select formControlName="entregado" id="entregado" class="form-control" [(ngModel)]="pedidoventa.entregado">
+              <option *ngFor="let entregado of opcionEntregado" [value]="entregado">{{entregado}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="nropedido">Numero de pedido</label>
+            <input formControlName="nropedido" type="number" id="nropedido" class="form-control" [(ngModel)]="pedidoventa.nropedido">
+            <div *ngIf="formularioPedidoVenta.get('nropedido').errors && formularioPedidoVenta.get('nropedido').dirty" class="alert alert-danger">
+              <p *ngIf="formularioPedidoVenta.get('nropedido').hasError('required')">Este campo es obligatorio</p>
+              <p *ngIf="formularioPedidoVenta.get('nropedido').hasError('pattern') || formularioPedidoVenta.get('nropedido').hasError('maxlength')">Ingrese un numero válido</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="calle">Calle</label>
+            <input formControlName="calle" type="text" id="calle" class="form-control" [(ngModel)]="pedidoventa.calle">
+            <div *ngIf="formularioPedidoVenta.get('calle').errors && formularioPedidoVenta.get('calle').dirty" class="alert alert-danger">
+              <p *ngIf="formularioPedidoVenta.get('calle').hasError('required')">Este campo es obligatorio</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="numero">Numero</label>
+            <input formControlName="numero" type="number" id="numero" class="form-control" [(ngModel)]="pedidoventa.numero">
+            <div *ngIf="formularioPedidoVenta.get('numero').errors && formularioPedidoVenta.get('numero').dirty" class="alert alert-danger">
+              <p *ngIf="formularioPedidoVenta.get('numero').hasError('required')">Este campo es obligatorio</p>
+              <p *ngIf="formularioPedidoVenta.get('numero').hasError('pattern') || formularioPedidoVenta.get('numero').hasError('maxlength')">Ingrese un numero válido</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="localidad">Localidad</label>
+            <input formControlName="localidad" type="text" id="localidad" class="form-control" [(ngModel)]="pedidoventa.localidad">
+            <div *ngIf="formularioPedidoVenta.get('localidad').errors && formularioPedidoVenta.get('localidad').dirty" class="alert alert-danger">
+              <p *ngIf="formularioPedidoVenta.get('localidad').hasError('required')">Este campo es obligatorio</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="latitud">Latitud</label>
+            <input formControlName="latitud" type="number" id="latitud" class="form-control" [(ngModel)]="pedidoventa.latitud">
+            <div *ngIf="formularioPedidoVenta.get('latitud').errors && formularioPedidoVenta.get('latitud').dirty" class="alert alert-danger">
+              <p *ngIf="formularioPedidoVenta.get('latitud').hasError('required')">Este campo es obligatorio</p>
+              <p *ngIf="formularioPedidoVenta.get('latitud').hasError('pattern')">Ingrese una latitud válida</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="longitud">Longitud</label>
+            <input formControlName="longitud" type="number" id="longitud" class="form-control" [(ngModel)]="pedidoventa.longitud">
+            <div *ngIf="formularioPedidoVenta.get('longitud').errors && formularioPedidoVenta.get('longitud').dirty" class="alert alert-danger">
+              <p *ngIf="formularioPedidoVenta.get('longitud').hasError('required')">Este campo es obligatorio</p>
+              <p *ngIf="formularioPedidoVenta.get('longitud').hasError('pattern')">Ingrese una longitud válida</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="ui-helper-clearfix" style="width:100%">
+        <button type="submit" class="btn btn-success btn-lg" style="float: right;" [disabled]="formularioPedidoVenta.invalid" (click)="save()">Guardar</button>
+        <button type="submit" class="btn btn-success btn-lg" style="float: right; margin-right: 10px" (click)="volver()">Regresar</button>
+      </div>
+    </form>
+  </div>
+</div>

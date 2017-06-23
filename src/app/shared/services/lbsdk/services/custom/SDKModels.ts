@@ -5,8 +5,8 @@ import { Articulo } from '../../models/Articulo';
 import { Cliente } from '../../models/Cliente';
 import { Pedidoventa } from '../../models/Pedidoventa';
 import { Pedidoventadetalle } from '../../models/Pedidoventadetalle';
-import { Rubro } from '../../models/Rubro';
 import { Usuario } from '../../models/Usuario';
+import { Rubro } from '../../models/Rubro';
 
 export interface Models { [name: string]: any }
 
@@ -19,8 +19,8 @@ export class SDKModels {
     Cliente: Cliente,
     Pedidoventa: Pedidoventa,
     Pedidoventadetalle: Pedidoventadetalle,
-    Rubro: Rubro,
     Usuario: Usuario,
+    Rubro: Rubro,
     
   };
 

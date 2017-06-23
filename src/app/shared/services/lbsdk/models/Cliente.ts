@@ -2,7 +2,7 @@
 
 declare var Object: any;
 export interface ClienteInterface {
-  "idcliente": number;
+  "idcliente"?: number;
   "razonsocial"?: string;
   "cuit"?: number;
   "saldo"?: number;

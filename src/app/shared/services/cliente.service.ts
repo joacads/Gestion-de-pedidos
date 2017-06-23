@@ -7,9 +7,12 @@ import { API_VERSION, BASE_URL } from '../services/lb.base.url';
 export class ClienteService {
 
   public clienteActual: Cliente = new Cliente();
+
   constructor(private clienteApi: ClienteApi) {
     LoopBackConfig.setBaseURL(BASE_URL);
     LoopBackConfig.setApiVersion(API_VERSION);
+
+    //cliente no seleccionado
     this.clienteActual.idcliente = -1;
   }
 
