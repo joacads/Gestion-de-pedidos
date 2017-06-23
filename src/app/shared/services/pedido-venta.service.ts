@@ -19,13 +19,13 @@ export class PedidoVentaService {
     return this.pedidoVentaApi.find(this.inludedObject);
   }
   getByClientId(idcliente: number): Observable<Pedidoventa[]> {
-    return this.pedidoVentaApi.find({ where: { idcliente: idcliente },include: 'domicilio' });
+    return this.pedidoVentaApi.find({ where: { idcliente: idcliente }, include: 'domicilio' });
   }
   getPedidoVentaById(id: number): Observable<Pedidoventa> {
     return this.pedidoVentaApi.findById(id);
   }
   create(pedidoVenta: Pedidoventa): Observable<Pedidoventa> {
-    pedidoVenta.entregado = pedidoVenta.entregado=='SI'?1:0;
+    pedidoVenta.entregado = pedidoVenta.entregado == 'SI' ? 1 : 0;
     return this.pedidoVentaApi.create(pedidoVenta);
   }
   update(pedidoVenta: Pedidoventa): Observable<Pedidoventa> {

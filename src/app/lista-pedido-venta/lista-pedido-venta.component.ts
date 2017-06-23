@@ -52,6 +52,7 @@ export class ListaPedidoVenta implements OnInit {
     }
   }
   onRowSelect(event) {
+    console.log(<Pedidoventa>event.data)
     this.pedidoVentaService.pedidoVentaActual = <Pedidoventa>event.data;
   }
   volver() {
