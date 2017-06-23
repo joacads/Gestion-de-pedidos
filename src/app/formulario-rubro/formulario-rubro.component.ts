@@ -27,6 +27,7 @@ export class FormularioRubro implements OnInit {
   }
 
   ngOnInit() {
+    this.obtenerRubros();
   }
 
   volver() {
@@ -39,6 +40,7 @@ export class FormularioRubro implements OnInit {
         this.opcionRubro = rubros;
       })
   }
+  
   save() {
     if (this.rubro.idrubro == -1) {
       this.rubro.idrubro = this.rubroAux.idrubro;
