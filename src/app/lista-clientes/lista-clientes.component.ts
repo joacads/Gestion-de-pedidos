@@ -24,7 +24,7 @@ export class ListaClientes implements OnInit {
 
   agregar() {
     let cliente: Cliente = new Cliente();
-    cliente.idcliente = -1;
+    this.clienteService.clienteActual.idcliente = -1;
     this.clienteService.clienteActual = cliente;
     this.router.navigate(['formularioCliente']);
   }
