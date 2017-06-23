@@ -16,7 +16,7 @@ export class RubroService {
   }
 
   getAll(): Observable<Rubro[]> {
-    return this.rubroApi.find();
+    return this.rubroApi.find({include:'rubro'});
   } 
   
   create(rubro: Rubro): Observable<Rubro> {
