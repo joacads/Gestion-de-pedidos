@@ -27,7 +27,7 @@
         <div class="col-md-4">
           <div class="form-group">
             <label for="calle">Calle</label>
-            <input formControlName="calle" type="text" id="calle" class="form-control" [(ngModel)]="cliente.calle">
+            <input formControlName="calle" type="text" id="calle" class="form-control" [(ngModel)]="domicilio.calle">
             <div *ngIf="formularioCliente.get('calle').errors && formularioCliente.get('calle').dirty" class="alert alert-danger">
               <p *ngIf="formularioCliente.get('calle').hasError('required')">Este campo es obligatorio</p>
             </div>
@@ -36,7 +36,7 @@
         <div class="col-md-4">
           <div class="form-group">
             <label for="numero">Numero</label>
-            <input formControlName="numero" type="number" id="numero" class="form-control" [(ngModel)]="cliente.numero">
+            <input formControlName="numero" type="number" id="numero" class="form-control" [(ngModel)]="domicilio.numero">
             <div *ngIf="formularioCliente.get('numero').errors && formularioCliente.get('numero').dirty" class="alert alert-danger">
               <p *ngIf="formularioCliente.get('numero').hasError('required')">Este campo es obligatorio</p>
               <p *ngIf="formularioCliente.get('numero').hasError('pattern') || formularioCliente.get('numero').hasError('maxlength')">Ingrese un numero válido</p>
@@ -46,7 +46,7 @@
         <div class="col-md-4">
           <div class="form-group">
             <label for="localidad">Localidad</label>
-            <input formControlName="localidad" type="text" id="localidad" class="form-control" [(ngModel)]="cliente.localidad">
+            <input formControlName="localidad" type="text" id="localidad" class="form-control" [(ngModel)]="domicilio.localidad">
             <div *ngIf="formularioCliente.get('localidad').errors && formularioCliente.get('localidad').dirty" class="alert alert-danger">
               <p *ngIf="formularioCliente.get('localidad').hasError('required')">Este campo es obligatorio</p>
             </div>

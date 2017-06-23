@@ -17,7 +17,7 @@ export class PedidoVentaService {
   getAll(): Observable<Pedidoventa[]> {
     return this.pedidoVentaApi.find();
   }
-  getAllByClientId(idcliente: number): Observable<Pedidoventa[]> {
+  getByClientId(idcliente: number): Observable<Pedidoventa[]> {
     return this.pedidoVentaApi.find({ where: { idcliente: idcliente } });
   }
   getPedidoVentaById(id: number): Observable<Pedidoventa> {

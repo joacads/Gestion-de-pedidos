@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ListaArticulos } from '../lista-articulos/lista-articulos.component';
-import { ArticuloService, Articulo, LoggerService } from '../shared/services/index';
+import { ArticuloService,RubroService, Articulo, Rubro, LoggerService } from '../shared/services/index';
 
 @Component({
   selector: 'app-formulario-articulo',
@@ -15,10 +15,13 @@ export class FormularioArticulo implements OnInit {
   articuloAux: Articulo;
   formularioArticulo: FormGroup;
 
-  constructor(public fb: FormBuilder, private articuloService: ArticuloService, private router: Router, private activatedRoute: ActivatedRoute) {
+  articuloSeleccionado: Articulo = new Articulo();
+
+  constructor(public fb: FormBuilder, private articuloService: ArticuloService, private rubroService: RubroService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.formularioArticulo = this.fb.group({
       'denominacion': ['', [Validators.required,]],
       'codigo': ['', [Validators.required, Validators.pattern(/\d{1}/)]],
+      'rubro': ['', [Validators.required,]],
       'preciocompra': ['', [Validators.required]],
       'precioventa': ['', [Validators.required, Validators.pattern(/\d{1}/)]],
     });
@@ -26,6 +29,15 @@ export class FormularioArticulo implements OnInit {
     this.articuloAux = new Articulo();
   }
   ngOnInit() {
+    this.obtenerRubros();
+  }
+  private opcionRubro: Rubro[] = [];
+
+  obtenerRubros() {
+    this.rubroService.getAll()
+    .subscribe((rubros: Rubro[]) => {
+      this.opcionRubro = rubros;
+    })
   }
 
   volver() {

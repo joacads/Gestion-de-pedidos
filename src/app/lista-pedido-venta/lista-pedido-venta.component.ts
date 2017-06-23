@@ -30,7 +30,7 @@ export class ListaPedidoVenta implements OnInit {
   }
   private recargarPedidoVentasDelCliente() {
     if (this.clienteService.esClienteExistente()) {
-      this.pedidoVentaService.getAllByClientId(this.clienteService.clienteActual.idcliente)
+      this.pedidoVentaService.getByClientId(this.clienteService.clienteActual.idcliente)
         .subscribe((pedidoVenta: Pedidoventa[]) => {
           this.listaPedidoVenta = pedidoVenta;
         })

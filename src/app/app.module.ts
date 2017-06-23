@@ -1,3 +1,4 @@
+//ANGULAR
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -25,12 +26,16 @@ import { ListaArticulos } from './lista-articulos/lista-articulos.component';
 import { FormularioArticulo } from './formulario-articulo/formulario-articulo.component';
 import { ListaRubros } from './lista-rubros/lista-rubros.component';
 import { FormularioRubro } from './formulario-rubro/formulario-rubro.component';
+import { ListaDetallePedidoVentaComponent } from './lista-detalle-pedido-venta/lista-detalle-pedido-venta.component';
+import { FormularioDetallePedidoVentaComponent } from './formulario-detalle-pedido-venta/formulario-detalle-pedido-venta.component';
 
 //SERVICIOS
 import { ClienteService } from './shared/services/cliente.service'
 import { PedidoVentaService } from './shared/services/pedido-venta.service'
 import { ArticuloService } from './shared/services/articulo.service'
 import { RubroService } from './shared/services/rubro.service';
+import { DomicilioService } from './shared/services/domicilio.service';
+import { DetallePedidoVentaService } from './shared/services/detalle-pedido-venta.service';
 
 //
 import { SDKBrowserModule } from './shared/services/lbsdk/index';
@@ -50,6 +55,8 @@ import { SDKBrowserModule } from './shared/services/lbsdk/index';
     FormularioArticulo,
     ListaRubros,
     FormularioRubro,
+    ListaDetallePedidoVentaComponent,
+    FormularioDetallePedidoVentaComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,7 +82,9 @@ import { SDKBrowserModule } from './shared/services/lbsdk/index';
     ClienteService,
     PedidoVentaService,
     ArticuloService,
-    RubroService
+    RubroService,
+    DomicilioService,
+    DetallePedidoVentaService
   ],
   bootstrap: [AppComponent]
 })

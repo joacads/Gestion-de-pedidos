@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ListaClientes } from '../lista-clientes/lista-clientes.component';
-import { ClienteService, Cliente, LoggerService } from '../shared/services/index';
+import { ClienteService, Cliente, DomicilioService, Domicilio, LoggerService } from '../shared/services/index';
 
 @Component({
   selector: 'app-formulario-cliente',
@@ -13,9 +13,12 @@ export class FormularioCliente implements OnInit {
 
   cliente: Cliente;
   clienteAux: Cliente;
+  domicilio: Domicilio;
+  domicilioAux: Domicilio;
 
   formularioCliente: FormGroup;
-  constructor(public fb: FormBuilder, private clienteServices: ClienteService, private router: Router, private activatedRoute: ActivatedRoute) {
+
+  constructor(public fb: FormBuilder, private clienteServices: ClienteService, private domicilioService: DomicilioService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.formularioCliente = this.fb.group({
       'razonsocial': ['', [Validators.required,]],
       'cuit': ['', [Validators.required, Validators.pattern(/\d{1}/)]],
@@ -25,7 +28,8 @@ export class FormularioCliente implements OnInit {
     });
     this.cliente = this.clienteServices.clienteActual;
     this.clienteAux = new Cliente();
-
+    this.domicilio = new Domicilio();
+    this.domicilioAux = new Domicilio();
   }
   ngOnInit() {
   }
@@ -35,14 +39,17 @@ export class FormularioCliente implements OnInit {
   }
   save() {
     if (this.cliente.idcliente == -1) {
-      console.log("Add");
       this.cliente.idcliente = this.clienteAux.idcliente;
-      this.clienteServices.create(this.cliente)
-        .subscribe((cliente: Cliente) => {
+      this.domicilioService.create(this.domicilio)
+        .flatMap((domicilioNuevo: Domicilio) => {
+          this.cliente.iddomicilio = domicilioNuevo.iddomicilio;
+          return this.clienteServices.create(this.cliente)
+        })
+        .suscribe((clienteNuevo: Cliente) => {
           this.router.navigate(['listaClientes']);
         })
+
     } else {
-      console.log("Update")
       this.clienteServices.update(this.cliente)
         .subscribe((cliente: Cliente) => {
           this.router.navigate(['listaClientes']);

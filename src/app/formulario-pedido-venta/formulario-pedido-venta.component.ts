@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RouterModule, Routes, Router } from '@angular/router';
 import { ListaPedidoVenta } from '../lista-pedido-venta/lista-pedido-venta.component';
-import { ClienteService, PedidoVentaService, Pedidoventa, LoggerService } from '../shared/services/index'
+import { ClienteService, PedidoVentaService, Pedidoventa, DomicilioService, Domicilio, LoggerService } from '../shared/services/index'
 
 @Component({
   selector: 'app-formulario-pedido-venta',
@@ -13,10 +13,10 @@ export class FormularioPedidoVenta implements OnInit {
 
   pedidoventa: Pedidoventa;
   pedidoventaAux: Pedidoventa;
-
+  domicilio: Domicilio;
   formularioPedidoVenta: FormGroup;
 
-  constructor(public fb: FormBuilder, private pedidoVentaService: PedidoVentaService, private router: Router, private clienteService: ClienteService) {
+  constructor(public fb: FormBuilder, private pedidoVentaService: PedidoVentaService, private domicilioService: DomicilioService, private router: Router, private clienteService: ClienteService) {
     this.formularioPedidoVenta = this.fb.group({
       'fechaentrega': ['', [Validators.required, Validators.pattern(/[0-9]\d|20[17]\d/)]],
       'fechapedido': ['', [Validators.required, Validators.pattern(/[0-9]\d|20[17]\d/)]],
@@ -40,8 +40,12 @@ export class FormularioPedidoVenta implements OnInit {
   save() {
     if (this.pedidoventa.idpedidoventa == -1) {
       this.pedidoventa.idpedidoventa = this.pedidoventaAux.idpedidoventa;
-      this.pedidoVentaService.create(this.pedidoventa)
-        .subscribe((pedidoventa: Pedidoventa) => {
+      this.domicilioService.create(this.domicilio)
+        .flatMap((domicilioNuevo: Domicilio) => {
+          this.pedidoventa.iddomicilio = domicilioNuevo.iddomicilio;
+          return this.pedidoVentaService.create(this.pedidoventa)
+        })
+        .suscribe((pedidoventa: Pedidoventa) => {
           this.router.navigate(['listaPedidoVenta']);
         })
     } else {

@@ -56,7 +56,7 @@
         <div class="col-md-4">
           <div class="form-group">
             <label for="calle">Calle</label>
-            <input formControlName="calle" type="text" id="calle" class="form-control" [(ngModel)]="pedidoventa.calle">
+            <input formControlName="calle" type="text" id="calle" class="form-control" [(ngModel)]="domicilio.calle">
             <div *ngIf="formularioPedidoVenta.get('calle').errors && formularioPedidoVenta.get('calle').dirty" class="alert alert-danger">
               <p *ngIf="formularioPedidoVenta.get('calle').hasError('required')">Este campo es obligatorio</p>
             </div>
@@ -65,7 +65,7 @@
         <div class="col-md-4">
           <div class="form-group">
             <label for="numero">Numero</label>
-            <input formControlName="numero" type="number" id="numero" class="form-control" [(ngModel)]="pedidoventa.numero">
+            <input formControlName="numero" type="number" id="numero" class="form-control" [(ngModel)]="domicilio.numero">
             <div *ngIf="formularioPedidoVenta.get('numero').errors && formularioPedidoVenta.get('numero').dirty" class="alert alert-danger">
               <p *ngIf="formularioPedidoVenta.get('numero').hasError('required')">Este campo es obligatorio</p>
               <p *ngIf="formularioPedidoVenta.get('numero').hasError('pattern') || formularioPedidoVenta.get('numero').hasError('maxlength')">Ingrese un numero válido</p>
@@ -75,7 +75,7 @@
         <div class="col-md-4">
           <div class="form-group">
             <label for="localidad">Localidad</label>
-            <input formControlName="localidad" type="text" id="localidad" class="form-control" [(ngModel)]="pedidoventa.localidad">
+            <input formControlName="localidad" type="text" id="localidad" class="form-control" [(ngModel)]="domicilio.localidad">
             <div *ngIf="formularioPedidoVenta.get('localidad').errors && formularioPedidoVenta.get('localidad').dirty" class="alert alert-danger">
               <p *ngIf="formularioPedidoVenta.get('localidad').hasError('required')">Este campo es obligatorio</p>
             </div>
@@ -86,7 +86,7 @@
         <div class="col-md-6">
           <div class="form-group">
             <label for="latitud">Latitud</label>
-            <input formControlName="latitud" type="number" id="latitud" class="form-control" [(ngModel)]="pedidoventa.latitud">
+            <input formControlName="latitud" type="number" id="latitud" class="form-control" [(ngModel)]="domicilio.latitud">
             <div *ngIf="formularioPedidoVenta.get('latitud').errors && formularioPedidoVenta.get('latitud').dirty" class="alert alert-danger">
               <p *ngIf="formularioPedidoVenta.get('latitud').hasError('required')">Este campo es obligatorio</p>
               <p *ngIf="formularioPedidoVenta.get('latitud').hasError('pattern')">Ingrese una latitud válida</p>
@@ -96,7 +96,7 @@
         <div class="col-md-6">
           <div class="form-group">
             <label for="longitud">Longitud</label>
-            <input formControlName="longitud" type="number" id="longitud" class="form-control" [(ngModel)]="pedidoventa.longitud">
+            <input formControlName="longitud" type="number" id="longitud" class="form-control" [(ngModel)]="domicilio.longitud">
             <div *ngIf="formularioPedidoVenta.get('longitud').errors && formularioPedidoVenta.get('longitud').dirty" class="alert alert-danger">
               <p *ngIf="formularioPedidoVenta.get('longitud').hasError('required')">Este campo es obligatorio</p>
               <p *ngIf="formularioPedidoVenta.get('longitud').hasError('pattern')">Ingrese una longitud válida</p>
