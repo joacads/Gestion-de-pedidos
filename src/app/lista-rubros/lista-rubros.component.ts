@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { RubroService, Rubro, LoggerService } from '../shared/services/index';
 
 @Component({
   selector: 'app-lista-rubros',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListaRubros implements OnInit {
 
-  constructor() { }
+  listaRubros: Rubro[];
+  constructor(private rubroService: RubroService, private log: LoggerService, private router: Router) { }
 
   ngOnInit() {
+    this.recargarListaRubros();
   }
-
+  private recargarListaRubros() {
+    this.rubroService.getAll()
+      .subscribe((rubros: Rubro[]) => {
+        this.listaRubros = rubros;
+      })
+  }
 }

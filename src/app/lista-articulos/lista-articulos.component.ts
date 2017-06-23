@@ -9,7 +9,6 @@ import { ArticuloService, Articulo, LoggerService } from '../shared/services/ind
 })
 export class ListaArticulos implements OnInit {
 
-
   listaArticulos: Articulo[];
   constructor(private articuloService: ArticuloService, private log: LoggerService, private router: Router) { }
 
