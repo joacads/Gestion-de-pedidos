@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { PedidoventaApi, Pedidoventa, LoopBackConfig } from '../services/lbsdk/index';
+import { PedidoventaApi, Pedidoventa, Domicilio, LoopBackConfig } from '../services/lbsdk/index';
 import { API_VERSION, BASE_URL } from '../services/lb.base.url';
 
 @Injectable()
 export class PedidoVentaService {
 
   public pedidoVentaActual: Pedidoventa = new Pedidoventa();
+  public inludedObject: any = { include: 'domicilio' };
 
   constructor(private pedidoVentaApi: PedidoventaApi) {
     LoopBackConfig.setBaseURL(BASE_URL);
     LoopBackConfig.setApiVersion(API_VERSION);
-    this.pedidoVentaActual.idpedidoventa = -1;
+    this.pedidoVentaActual.domicilio = new Domicilio();
   }
 
   getAll(): Observable<Pedidoventa[]> {

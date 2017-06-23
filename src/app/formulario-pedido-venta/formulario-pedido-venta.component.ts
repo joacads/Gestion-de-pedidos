@@ -38,19 +38,22 @@ export class FormularioPedidoVenta implements OnInit {
     this.router.navigate(['listaPedidoVenta']);
   }
   save() {
-    if (this.pedidoventa.idpedidoventa == -1) {
-      this.pedidoventa.idpedidoventa = this.pedidoventaAux.idpedidoventa;
-      this.domicilioService.create(this.domicilio)
+    if (this.pedidoVentaService.pedidoVentaActual.idpedidoventa == null) {
+      this.domicilioService.create(this.pedidoVentaService.pedidoVentaActual.domicilio)
         .flatMap((domicilioNuevo: Domicilio) => {
-          this.pedidoventa.iddomicilio = domicilioNuevo.iddomicilio;
-          return this.pedidoVentaService.create(this.pedidoventa)
+          this.pedidoVentaService.pedidoVentaActual.iddomicilio = domicilioNuevo.iddomicilio;
+          return this.pedidoVentaService.create(this.pedidoVentaService.pedidoVentaActual)
         })
-        .subscribe((pedidoventa: Pedidoventa) => {
+        .subscribe((pedidoventaNuevo: Pedidoventa) => {
+          this.pedidoVentaService.pedidoVentaActual.idpedidoventa = pedidoventaNuevo.idpedidoventa;
           this.router.navigate(['listaPedidoVenta']);
         })
     } else {
-      this.pedidoVentaService.update(this.pedidoventa)
-        .subscribe((pedidoventa: Pedidoventa) => {
+      this.pedidoVentaService.update(this.pedidoVentaService.pedidoVentaActual)
+        .flatMap((pedidoventa: Pedidoventa) => {
+          return this.domicilioService.update(this.pedidoVentaService.pedidoVentaActual.domicilio)
+        })
+        .subscribe((domicilio: Domicilio) => {
           this.router.navigate(['listaPedidoVenta']);
         })
     }
