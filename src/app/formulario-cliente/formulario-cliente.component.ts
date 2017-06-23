@@ -12,8 +12,9 @@ import { ClienteService, Cliente, LoggerService } from '../shared/services/index
 export class FormularioCliente implements OnInit {
 
   cliente: Cliente;
-  formularioCliente: FormGroup;
+  clienteAux: Cliente;
 
+  formularioCliente: FormGroup;
   constructor(public fb: FormBuilder, private clienteServices: ClienteService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.formularioCliente = this.fb.group({
       'razonsocial': ['', [Validators.required,]],
@@ -23,19 +24,25 @@ export class FormularioCliente implements OnInit {
       'localidad': ['', [Validators.required,]],
     });
     this.cliente = this.clienteServices.clienteActual;
+    this.clienteAux = new Cliente();
+
   }
   ngOnInit() {
   }
+
   volver() {
     this.router.navigate(['listaClientes']);
   }
   save() {
     if (this.cliente.idcliente == -1) {
+      console.log("Add");
+      this.cliente.idcliente = this.clienteAux.idcliente;
       this.clienteServices.create(this.cliente)
         .subscribe((cliente: Cliente) => {
           this.router.navigate(['listaClientes']);
         })
     } else {
+      console.log("Update")
       this.clienteServices.update(this.cliente)
         .subscribe((cliente: Cliente) => {
           this.router.navigate(['listaClientes']);

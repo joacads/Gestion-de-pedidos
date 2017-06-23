@@ -12,6 +12,8 @@ import { ClienteService, PedidoVentaService, Pedidoventa, LoggerService } from '
 export class FormularioPedidoVenta implements OnInit {
 
   pedidoventa: Pedidoventa;
+  pedidoventaAux: Pedidoventa;
+
   formularioPedidoVenta: FormGroup;
 
   constructor(public fb: FormBuilder, private pedidoVentaService: PedidoVentaService, private router: Router, private clienteService: ClienteService) {
@@ -28,6 +30,7 @@ export class FormularioPedidoVenta implements OnInit {
       'longitud': ['', [Validators.required, Validators.pattern(/(?:\d*)?\d+/)]],
     })
     this.pedidoventa = this.pedidoVentaService.pedidoVentaActual;
+    this.pedidoventaAux = new Pedidoventa;
   }
   ngOnInit() {
   }
@@ -36,6 +39,7 @@ export class FormularioPedidoVenta implements OnInit {
   }
   save() {
     if (this.pedidoventa.idpedidoventa == -1) {
+      this.pedidoventa.idpedidoventa = this.pedidoventaAux.idpedidoventa;
       this.pedidoVentaService.create(this.pedidoventa)
         .subscribe((pedidoventa: Pedidoventa) => {
           this.router.navigate(['listaPedidoVenta']);

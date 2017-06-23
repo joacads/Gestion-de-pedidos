@@ -10,7 +10,7 @@
     </div>
 
     <p-dataTable [value]="listaPedidoVenta" selectionMode="single" sortMode="single" reorderableColumns="true" [globalFilter]="gb"
-      scrollable="true" scrollHeight="450px" columnResizeMode="expand" [(selection)]="clienteSeleccionado" (onRowSelect)="onRowSelect($event)"
+      scrollable="true" scrollHeight="450px" columnResizeMode="expand" [(selection)]="pedidoventaSeleccionado" (onRowSelect)="onRowSelect($event)"
       [paginator]="true" rows="15" [responsive]="true">
 
       <p-header>

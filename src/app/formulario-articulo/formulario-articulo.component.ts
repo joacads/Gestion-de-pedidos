@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ListaArticulos } from '../lista-articulos/lista-articulos.component';
+import { ArticuloService, Articulo, LoggerService } from '../shared/services/index';
 
 @Component({
   selector: 'app-formulario-articulo',
@@ -7,9 +11,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormularioArticulo implements OnInit {
 
-  constructor() { }
+  articulo: Articulo;
+  FormularioArticulo: FormGroup;
 
+  constructor(public fb: FormBuilder, private articuloService: ArticuloService, private router: Router, private activatedRoute: ActivatedRoute) {
+    this.FormularioArticulo = this.fb.group({
+      'denominacion': ['', [Validators.required,]],
+      'codigo': ['', [Validators.required, Validators.pattern(/\d{1}/)]],
+      'preciocompra': ['', [Validators.required]],
+      'precioventa': ['', [Validators.required, Validators.pattern(/\d{1}/)]],
+    });
+    this.articulo = this.articuloService.articuloActual;
+  }
   ngOnInit() {
   }
 
+  volver() {
+    this.router.navigate(['listaArticulos']);
+  }
+
+  save() {
+    if (this.articulo.idarticulo == -1) {
+      this.articuloService.create(this.articulo)
+        .subscribe((articulo: Articulo) => {
+          this.router.navigate(['listaArticulos']);
+        })
+    } else {
+      this.articuloService.update(this.articulo)
+        .subscribe((articulo: Articulo) => {
+          this.router.navigate(['listaArticulos']);
+        })
+    }
+  }
 }

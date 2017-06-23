@@ -13,10 +13,10 @@ export class ListaClientes implements OnInit {
   constructor(private clienteService: ClienteService, private log: LoggerService, private router: Router) { }
 
   ngOnInit() {
-    this.recargarEstados();
+    this.recargarListaClientes();
   }
 
-  private recargarEstados() {
+  private recargarListaClientes() {
     this.clienteService.getAll().subscribe((clientes: Cliente[]) => {
       this.listaCliente = clientes
     })
@@ -38,7 +38,7 @@ export class ListaClientes implements OnInit {
   delete() {
     if (this.clienteService.esClienteExistente()) {
       this.clienteService.delete(this.clienteService.clienteActual).subscribe(() => {
-        this.recargarEstados();
+        this.recargarListaClientes();
       })
     } else {
       alert("Seleccionar un cliente!");
