@@ -23,8 +23,8 @@ export class FormularioCliente implements OnInit {
     });
   }
   ngOnInit() {
-    if(!this.clienteServices.clienteActual.domicilio){
-      this.clienteServices.clienteActual.domicilio = new Domicilio({iddomicilio:-1});
+    if (!this.clienteServices.clienteActual.domicilio) {
+      this.clienteServices.clienteActual.domicilio = new Domicilio();
     }
   }
 
@@ -32,7 +32,7 @@ export class FormularioCliente implements OnInit {
     this.router.navigate(['listaClientes']);
   }
   save() {
-    if (this.clienteServices.clienteActual.idcliente == -1) {
+    if (this.clienteServices.clienteActual.idcliente == null) {
       this.domicilioService.create(this.clienteServices.clienteActual.domicilio)
         .flatMap((domicilioNuevo: Domicilio) => {
           this.clienteServices.clienteActual.iddomicilio = domicilioNuevo.iddomicilio;
@@ -44,7 +44,10 @@ export class FormularioCliente implements OnInit {
         })
     } else {
       this.clienteServices.update(this.clienteServices.clienteActual)
-        .subscribe((cliente: Cliente) => {
+        .flatMap((cliente: Cliente) => {
+          return this.domicilioService.update(this.clienteServices.clienteActual.domicilio)
+        })
+        .subscribe((domicilio: Domicilio) => {
           this.router.navigate(['listaClientes']);
         })
     }

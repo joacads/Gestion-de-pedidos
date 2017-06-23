@@ -14,9 +14,7 @@ export class ClienteService {
     LoopBackConfig.setBaseURL(BASE_URL);
     LoopBackConfig.setApiVersion(API_VERSION);
     //cliente no seleccionado
-    this.clienteActual.idcliente = -1;
     this.clienteActual.domicilio = new Domicilio();
-    this.clienteActual.domicilio.iddomicilio = -1;
   }
 
   getAll(): Observable<Cliente[]> {
@@ -28,7 +26,6 @@ export class ClienteService {
   }
 
   create(cliente: Cliente): Observable<Cliente> {
-    cliente.idcliente = null;
     return this.clienteApi.create(cliente);
   }
 
