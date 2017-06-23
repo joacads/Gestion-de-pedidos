@@ -11,9 +11,6 @@ import { ClienteService, PedidoVentaService, Pedidoventa, DomicilioService, Domi
 })
 export class FormularioPedidoVenta implements OnInit {
 
-  pedidoventa: Pedidoventa;
-  pedidoventaAux: Pedidoventa;
-  domicilio: Domicilio;
   formularioPedidoVenta: FormGroup;
 
   constructor(public fb: FormBuilder, private pedidoVentaService: PedidoVentaService, private domicilioService: DomicilioService, private router: Router, private clienteService: ClienteService) {
@@ -29,15 +26,19 @@ export class FormularioPedidoVenta implements OnInit {
       'latitud': ['', [Validators.required, Validators.pattern(/(?:\d*)?\d+/)]],
       'longitud': ['', [Validators.required, Validators.pattern(/(?:\d*)?\d+/)]],
     })
-    this.pedidoventa = this.pedidoVentaService.pedidoVentaActual;
-    this.pedidoventaAux = new Pedidoventa;
   }
-  ngOnInit() {
+ ngOnInit() {
+       console.log(this.clienteService.clienteActual)
+
+    if (!this.pedidoVentaService.pedidoVentaActual.domicilio) {
+      this.pedidoVentaService.pedidoVentaActual.domicilio = new Domicilio();
+    }
   }
   volver() {
     this.router.navigate(['listaPedidoVenta']);
   }
   save() {
+      this.pedidoVentaService.pedidoVentaActual.idcliente = this.clienteService.clienteActual.idcliente;
     if (this.pedidoVentaService.pedidoVentaActual.idpedidoventa == null) {
       this.domicilioService.create(this.pedidoVentaService.pedidoVentaActual.domicilio)
         .flatMap((domicilioNuevo: Domicilio) => {

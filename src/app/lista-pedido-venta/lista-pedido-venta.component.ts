@@ -10,24 +10,14 @@ import { PedidoVentaService, Pedidoventa, LoggerService, ClienteService, Cliente
 
 export class ListaPedidoVenta implements OnInit {
 
-  cliente: Cliente = new Cliente();
-
   listaPedidoVenta: Pedidoventa[];
   constructor(private pedidoVentaService: PedidoVentaService, private log: LoggerService, private router: Router, private clienteService: ClienteService) {
   }
   ngOnInit() {
-    this.ObtenerCliente();
+    console.log(this.clienteService.clienteActual)
     this.recargarPedidoVentasDelCliente();
   }
 
-  private ObtenerCliente() {
-    if (this.clienteService.esClienteExistente()) {
-      this.clienteService.getClienteById(this.clienteService.clienteActual.idcliente)
-        .subscribe((cliente: Cliente) => {
-          this.cliente = cliente;
-        })
-    }
-  }
   private recargarPedidoVentasDelCliente() {
     if (this.clienteService.esClienteExistente()) {
       this.pedidoVentaService.getByClientId(this.clienteService.clienteActual.idcliente)
@@ -39,7 +29,6 @@ export class ListaPedidoVenta implements OnInit {
 
   agregar() {
     let pedidoVenta: Pedidoventa = new Pedidoventa();
-    pedidoVenta.idpedidoventa = -1;
     this.pedidoVentaService.pedidoVentaActual = pedidoVenta;
     this.router.navigate(['formularioPedidoVenta']);
   }
