@@ -34,4 +34,3 @@ export class DetallePedidoVentaService {
     return this.pedidoVentaDetalleActual.idpedidoventadetalle != -1;
   }
 }
-}

@@ -31,8 +31,8 @@ export class FormularioArticulo implements OnInit {
   ngOnInit() {
     this.obtenerRubros();
   }
+  
   private opcionRubro: Rubro[] = [];
-
   obtenerRubros() {
     this.rubroService.getAll()
     .subscribe((rubros: Rubro[]) => {

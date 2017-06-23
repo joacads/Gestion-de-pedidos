@@ -45,7 +45,7 @@ export class FormularioPedidoVenta implements OnInit {
           this.pedidoventa.iddomicilio = domicilioNuevo.iddomicilio;
           return this.pedidoVentaService.create(this.pedidoventa)
         })
-        .suscribe((pedidoventa: Pedidoventa) => {
+        .subscribe((pedidoventa: Pedidoventa) => {
           this.router.navigate(['listaPedidoVenta']);
         })
     } else {

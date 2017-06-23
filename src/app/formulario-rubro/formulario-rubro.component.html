@@ -23,6 +23,18 @@
           </div>
         </div>
       </div>
+      <div class="row">
+        <div class="col-md-3">
+          <label for="rubro">Rubro al que pertenece</label>
+        </div>
+        <div class="col-md-9">
+          <div class="form-group">
+            <select formControlName="rubro" id="idrubro" class="form-control" [(ngModel)]="rubroSeleccionado">
+              <option *ngFor="let rubro of opcionRubro" [ngValue]="rubro">{{rubro.denominacion}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
       <br>
       <div class="ui-helper-clearfix" style="width:100%">
         <button type="submit" class="btn btn-success btn-lg" style="float: right;" [disabled]="formularioRubro.invalid" (click)="save()">Guardar</button>

@@ -45,7 +45,7 @@ export class FormularioCliente implements OnInit {
           this.cliente.iddomicilio = domicilioNuevo.iddomicilio;
           return this.clienteServices.create(this.cliente)
         })
-        .suscribe((clienteNuevo: Cliente) => {
+        .subscribe((clienteNuevo: Cliente) => {
           this.router.navigate(['listaClientes']);
         })
 

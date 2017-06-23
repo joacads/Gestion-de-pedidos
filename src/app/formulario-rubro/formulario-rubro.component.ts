@@ -14,7 +14,10 @@ export class FormularioRubro implements OnInit {
   rubro: Rubro;
   rubroAux: Rubro;
   formularioRubro: FormGroup;
-  constructor(public fb: FormBuilder, private rubroService: RubroService, private router: Router, private activatedRoute: ActivatedRoute) { 
+
+  rubroSeleccionado: Rubro = new Rubro();
+
+  constructor(public fb: FormBuilder, private rubroService: RubroService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.formularioRubro = this.fb.group({
       'denominacion': ['', [Validators.required,]],
       'codigo': ['', [Validators.required, Validators.pattern(/\d{1}/)]],
@@ -29,7 +32,13 @@ export class FormularioRubro implements OnInit {
   volver() {
     this.router.navigate(['listaRubros']);
   }
-
+  private opcionRubro: Rubro[] = [];
+  obtenerRubros() {
+    this.rubroService.getAll()
+      .subscribe((rubros: Rubro[]) => {
+        this.opcionRubro = rubros;
+      })
+  }
   save() {
     if (this.rubro.idrubro == -1) {
       this.rubro.idrubro = this.rubroAux.idrubro;

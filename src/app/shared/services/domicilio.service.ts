@@ -14,15 +14,15 @@ export class DomicilioService {
         return this.domicilioApi.find();
     }
 
-    create(cliente: Domicilio): Observable<Domicilio> {
-        return this.domicilioApi.create(cliente);
+    create(domicilio: Domicilio): Observable<Domicilio> {
+        return this.domicilioApi.create(domicilio);
     }
 
-    update(cliente: Domicilio): Observable<Domicilio> {
-        return this.domicilioApi.patchAttributes(cliente.idcliente, cliente);
+    update(domicilio: Domicilio): Observable<Domicilio> {
+        return this.domicilioApi.patchAttributes(domicilio.iddomicilio, domicilio);
     }
 
-    delete(cliente: Domicilio): Observable<{}> {
-        return this.domicilioApi.deleteById(cliente.idcliente);
+    delete(domicilio: Domicilio): Observable<{}> {
+        return this.domicilioApi.deleteById(domicilio.iddomicilio);
     }
 }
