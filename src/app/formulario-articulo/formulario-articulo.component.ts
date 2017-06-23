@@ -12,16 +12,18 @@ import { ArticuloService, Articulo, LoggerService } from '../shared/services/ind
 export class FormularioArticulo implements OnInit {
 
   articulo: Articulo;
-  FormularioArticulo: FormGroup;
+  articuloAux: Articulo;
+  formularioArticulo: FormGroup;
 
   constructor(public fb: FormBuilder, private articuloService: ArticuloService, private router: Router, private activatedRoute: ActivatedRoute) {
-    this.FormularioArticulo = this.fb.group({
+    this.formularioArticulo = this.fb.group({
       'denominacion': ['', [Validators.required,]],
       'codigo': ['', [Validators.required, Validators.pattern(/\d{1}/)]],
       'preciocompra': ['', [Validators.required]],
       'precioventa': ['', [Validators.required, Validators.pattern(/\d{1}/)]],
     });
     this.articulo = this.articuloService.articuloActual;
+    this.articuloAux = new Articulo();
   }
   ngOnInit() {
   }
@@ -32,6 +34,7 @@ export class FormularioArticulo implements OnInit {
 
   save() {
     if (this.articulo.idarticulo == -1) {
+      this.articulo.idarticulo = this.articuloAux.idarticulo;
       this.articuloService.create(this.articulo)
         .subscribe((articulo: Articulo) => {
           this.router.navigate(['listaArticulos']);
