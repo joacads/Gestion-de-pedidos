@@ -8,7 +8,7 @@ export class RubroService {
 
   public rubroActual: Rubro = new Rubro();
 
-  constructor(private rubroApi: RubroApi) { 
+  constructor(private rubroApi: RubroApi) {
     LoopBackConfig.setBaseURL(BASE_URL);
     LoopBackConfig.setApiVersion(API_VERSION);
     //rubro no seleccionado
@@ -17,5 +17,20 @@ export class RubroService {
 
   getAll(): Observable<Rubro[]> {
     return this.rubroApi.find();
+  } 
+  
+  create(rubro: Rubro): Observable<Rubro> {
+    return this.rubroApi.create(rubro);
+  }
+
+  update(rubro: Rubro): Observable<Rubro> {
+    return this.rubroApi.patchAttributes(rubro.idrubro, rubro);
+  }
+
+  delete(rubro: Rubro): Observable<{}> {
+    return this.rubroApi.deleteById(rubro.idrubro);
+  }
+  esRubroExistente(): boolean {
+    return this.rubroActual.idrubro != -1;
   }
 }

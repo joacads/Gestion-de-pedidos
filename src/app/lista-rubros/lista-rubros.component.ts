@@ -21,4 +21,29 @@ export class ListaRubros implements OnInit {
         this.listaRubros = rubros;
       })
   }
+  agregar(){
+    let articulo: Rubro = new Rubro();
+    articulo.idrubro = -1;
+    this.rubroService.rubroActual = articulo;
+    this.router.navigate(['formularioRubro']);
+  }
+  editar() {
+    if (this.rubroService.esRubroExistente()) {
+      this.router.navigate(['formularioRubro']);
+    } else {
+      alert("Seleccionar un rubro!");
+    }
+  }
+  delete() {
+    if (this.rubroService.esRubroExistente()) {
+      this.rubroService.delete(this.rubroService.rubroActual).subscribe(() => {
+        this.recargarListaRubros();
+      })
+    } else {
+      alert("Seleccionar un rubro!");
+    }
+  }
+  onRowSelect(event) {
+    this.rubroService.rubroActual = <Rubro>event.data;
+  }
 }
