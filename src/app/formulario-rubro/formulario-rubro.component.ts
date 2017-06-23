@@ -11,20 +11,15 @@ import { RubroService, Rubro, LoggerService } from '../shared/services/index';
 })
 export class FormularioRubro implements OnInit {
 
-  rubro: Rubro;
-  rubroAux: Rubro;
   formularioRubro: FormGroup;
-
-  rubroSeleccionado: Rubro = new Rubro();
+  private opcionRubros: Rubro[] = [];
 
   constructor(public fb: FormBuilder, private rubroService: RubroService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.formularioRubro = this.fb.group({
       'denominacion': ['', [Validators.required,]],
-      'rubro': ['', [Validators.required,]],
+      'rubro': [null],
       'codigo': ['', [Validators.required, Validators.pattern(/\d{1}/)]],
     });
-    this.rubro = this.rubroService.rubroActual;
-    this.rubroAux = new Rubro();
   }
 
   ngOnInit() {
@@ -34,23 +29,23 @@ export class FormularioRubro implements OnInit {
   volver() {
     this.router.navigate(['listaRubros']);
   }
-  private opcionRubro: Rubro[] = [];
   obtenerRubros() {
     this.rubroService.getAll()
       .subscribe((rubros: Rubro[]) => {
-        this.opcionRubro = rubros;
+        this.opcionRubros = rubros;
       })
   }
 
   save() {
-    if (this.rubro.idrubro == -1) {
-      this.rubro.idrubro = this.rubroAux.idrubro;
-      this.rubroService.create(this.rubro)
+    
+    console.log(this.rubroService.rubroActual.idrubro);
+    if (this.rubroService.rubroActual.idrubro == null) {
+      this.rubroService.create(this.rubroService.rubroActual)
         .subscribe((rubro: Rubro) => {
           this.router.navigate(['listaRubros']);
         })
     } else {
-      this.rubroService.update(this.rubro)
+      this.rubroService.update(this.rubroService.rubroActual)
         .subscribe((rubro: Rubro) => {
           this.router.navigate(['listaRubros']);
         })

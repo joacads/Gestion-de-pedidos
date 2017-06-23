@@ -12,7 +12,7 @@ export class RubroService {
     LoopBackConfig.setBaseURL(BASE_URL);
     LoopBackConfig.setApiVersion(API_VERSION);
     //rubro no seleccionado
-    this.rubroActual.idrubro = -1;
+    
   }
 
   getAll(): Observable<Rubro[]> {
@@ -20,6 +20,7 @@ export class RubroService {
   } 
   
   create(rubro: Rubro): Observable<Rubro> {
+    this.rubroActual.idrubro = null;
     return this.rubroApi.create(rubro);
   }
 
@@ -31,6 +32,6 @@ export class RubroService {
     return this.rubroApi.deleteById(rubro.idrubro);
   }
   esRubroExistente(): boolean {
-    return this.rubroActual.idrubro != -1;
+    return this.rubroActual.idrubro!=null;
   }
 }

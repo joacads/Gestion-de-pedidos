@@ -23,7 +23,6 @@ export class ListaRubros implements OnInit {
   }
   agregar(){
     let articulo: Rubro = new Rubro();
-    articulo.idrubro = -1;
     this.rubroService.rubroActual = articulo;
     this.router.navigate(['formularioRubro']);
   }

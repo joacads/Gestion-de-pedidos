@@ -6,7 +6,7 @@
         <div class="col-md-6">
           <div class="form-group">
             <label for="denominacion">Denominación</label>
-            <input formControlName="denominacion" type="text" id="denominacion" class="form-control" [(ngModel)]="rubro.denominacion">
+            <input formControlName="denominacion" type="text" id="denominacion" class="form-control" [(ngModel)]="rubroService.rubroActual.denominacion">
             <div *ngIf="formularioRubro.get('denominacion').errors && formularioRubro.get('denominacion').dirty" class="alert alert-danger">
               <p *ngIf="formularioRubro.get('denominacion').hasError('required')">Este campo es obligatorio</p>
             </div>
@@ -15,7 +15,7 @@
         <div class="col-md-6">
           <div class="form-group">
             <label for="codigo">Codigo</label>
-            <input formControlName="codigo" type="number" id="codigo" class="form-control" [(ngModel)]="rubro.codigo">
+            <input formControlName="codigo" type="number" id="codigo" class="form-control" [(ngModel)]="rubroService.rubroActual.codigo">
             <div *ngIf="formularioRubro.get('codigo').errors && formularioRubro.get('codigo').dirty" class="alert alert-danger">
               <p *ngIf="formularioRubro.get('codigo').hasError('required')">Este campo es obligatorio</p>
               <p *ngIf="formularioRubro.get('codigo').hasError('pattern') || formularioRubro.get('codigo').hasError('maxlength')">Ingrese un codigo válido</p>
@@ -29,8 +29,8 @@
         </div>
         <div class="col-md-9">
           <div class="form-group">
-            <select formControlName="rubro" id="idrubro" class="form-control" [(ngModel)]="rubroAux.idrubro">
-              <option *ngFor="let rubro of opcionRubro" [ngValue]="rubro">{{rubro.denominacion}}</option>
+            <select formControlName="rubro" id="idrubro" class="form-control" [(ngModel)]="rubroService.rubroActual.idrubropadre">
+              <option *ngFor="let rubro of opcionRubros" [ngValue]="rubro.idrubro">{{rubro.denominacion}}</option>
             </select>
           </div>
         </div>
