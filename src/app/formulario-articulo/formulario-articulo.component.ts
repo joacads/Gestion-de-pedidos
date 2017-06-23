@@ -14,6 +14,7 @@ export class FormularioArticulo implements OnInit {
   articulo: Articulo;
   articuloAux: Articulo;
   formularioArticulo: FormGroup;
+  rubro: Rubro;
 
   articuloSeleccionado: Articulo = new Articulo();
 
@@ -27,6 +28,8 @@ export class FormularioArticulo implements OnInit {
     });
     this.articulo = this.articuloService.articuloActual;
     this.articuloAux = new Articulo();
+
+    this.rubro = new Rubro();
   }
   ngOnInit() {
     this.obtenerRubros();
@@ -46,6 +49,7 @@ export class FormularioArticulo implements OnInit {
 
   save() {
     if (this.articulo.idarticulo == -1) {
+      this.articulo.idrubro = this.rubro.idrubro;
       this.articulo.idarticulo = this.articuloAux.idarticulo;
       this.articuloService.create(this.articulo)
         .subscribe((articulo: Articulo) => {

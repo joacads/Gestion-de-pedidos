@@ -20,6 +20,7 @@ export class FormularioRubro implements OnInit {
   constructor(public fb: FormBuilder, private rubroService: RubroService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.formularioRubro = this.fb.group({
       'denominacion': ['', [Validators.required,]],
+      'rubro': ['', [Validators.required,]],
       'codigo': ['', [Validators.required, Validators.pattern(/\d{1}/)]],
     });
     this.rubro = this.rubroService.rubroActual;
@@ -27,6 +28,7 @@ export class FormularioRubro implements OnInit {
   }
 
   ngOnInit() {
+    this.obtenerRubros();
   }
 
   volver() {
@@ -39,6 +41,7 @@ export class FormularioRubro implements OnInit {
         this.opcionRubro = rubros;
       })
   }
+
   save() {
     if (this.rubro.idrubro == -1) {
       this.rubro.idrubro = this.rubroAux.idrubro;
