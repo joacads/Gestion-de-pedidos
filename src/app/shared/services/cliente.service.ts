@@ -37,7 +37,7 @@ export class ClienteService {
   }
 
   esClienteExistente(): boolean {
-    return this.clienteActual.idcliente != -1;
+    return this.clienteActual.idcliente != null;
   }
 
 }

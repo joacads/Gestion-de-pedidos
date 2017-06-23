@@ -12,7 +12,6 @@ export class ArticuloService {
     LoopBackConfig.setBaseURL(BASE_URL);
     LoopBackConfig.setApiVersion(API_VERSION);
     //articulo no seleccionado
-    this.articuloActual.idarticulo = -1;
   }
 
   getAll(): Observable<Articulo[]> {
@@ -32,6 +31,6 @@ export class ArticuloService {
   }
 
   esArticuloExistente(): boolean {
-    return this.articuloActual.idarticulo != -1;
+    return this.articuloActual.idarticulo != null;
   }
 }

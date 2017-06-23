@@ -17,7 +17,6 @@ export class ListaArticulos implements OnInit {
   }
   agregar(){
     let articulo: Articulo = new Articulo();
-    articulo.idarticulo = -1;
     this.articuloService.articuloActual = articulo;
     this.router.navigate(['formularioArticulo']);
   }

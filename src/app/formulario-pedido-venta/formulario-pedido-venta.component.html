@@ -37,7 +37,7 @@
           <div class="form-group">
             <label for="entregado">Entregado</label>
             <select formControlName="entregado" id="entregado" class="form-control" [(ngModel)]="pedidoVentaService.pedidoVentaActual.entregado">
-              <option *ngFor="let entregado of opcionEntregado" [value]="entregado">{{entregado}}</option>
+              <option *ngFor="let entregado of opcionEntregado" [value]="entregado.valor">{{entregado.nombre}}</option>
             </select>
           </div>
         </div>

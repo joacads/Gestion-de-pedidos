@@ -10,7 +10,6 @@ export class DetallePedidoVentaService {
   constructor(private pedidoVentaDetalleeApi: PedidoventadetalleApi) {
     LoopBackConfig.setBaseURL(BASE_URL);
     LoopBackConfig.setApiVersion(API_VERSION);
-    this.pedidoVentaDetalleActual.idpedidoventadetalle = -1;
   }
   getAll(): Observable<Pedidoventadetalle[]> {
     return this.pedidoVentaDetalleeApi.find();
@@ -31,6 +30,6 @@ export class DetallePedidoVentaService {
     return this.pedidoVentaDetalleeApi.deleteById(pedidoVenta.idpedidoventadetalle);
   }
   espedidoVentaExistente(): boolean {
-    return this.pedidoVentaDetalleActual.idpedidoventadetalle != -1;
+    return this.pedidoVentaDetalleActual.idpedidoventadetalle != null;
   }
 }

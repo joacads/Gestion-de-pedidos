@@ -16,8 +16,6 @@ export class MenuLateralComponenteComponent implements OnInit {
   irListaClientes() {
     let cliente= new Cliente();
     let pedidoventa = new Pedidoventa();
-    cliente.idcliente = -1;
-    pedidoventa.idpedidoventa = -1;
     this.clienteService.clienteActual = cliente;
     this.pedidoVentaService.pedidoVentaActual = pedidoventa;
     this.router.navigate(['listaClientes'])

@@ -61,5 +61,5 @@ export class FormularioPedidoVenta implements OnInit {
   }
   // datos auto-complete formulario
   opcionEstado = ['', 'Retrasado', 'En proceso', 'Finalizado', 'Cancelado'];
-  opcionEntregado = ['', 'No', 'Si'];
+  opcionEntregado = [{nombre:'',valor:null},{nombre:'No',valor:0},{nombre:'Sí',value:1}];
 }

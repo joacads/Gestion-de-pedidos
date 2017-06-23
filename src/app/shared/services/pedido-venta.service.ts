@@ -25,7 +25,7 @@ export class PedidoVentaService {
     return this.pedidoVentaApi.findById(id);
   }
   create(pedidoVenta: Pedidoventa): Observable<Pedidoventa> {
-    pedidoVenta.entregado = pedidoVenta.entregado == 'SI' ? 1 : 0;
+    pedidoVenta.entregado = pedidoVenta.entregado;
     return this.pedidoVentaApi.create(pedidoVenta);
   }
   update(pedidoVenta: Pedidoventa): Observable<Pedidoventa> {
