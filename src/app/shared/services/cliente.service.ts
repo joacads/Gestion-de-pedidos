@@ -13,7 +13,6 @@ export class ClienteService {
   constructor(private clienteApi: ClienteApi) {
     LoopBackConfig.setBaseURL(BASE_URL);
     LoopBackConfig.setApiVersion(API_VERSION);
-    //cliente no seleccionado
     this.clienteActual.domicilio = new Domicilio();
   }
 
