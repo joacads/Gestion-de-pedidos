@@ -9,10 +9,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //TEMPLATE
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HeaderComponenteComponent } from './header-componente/header-componente.component';
-import { MenuLateralComponenteComponent } from './menu-lateral-componente/menu-lateral-componente.component';
-import { FooterComponenteComponent } from './footer-componente/footer-componente.component';
-import { ContenidoComponenteComponent } from './contenido-componente/contenido-componente.component';
+import { HeaderComponent } from './header/header.component';
+import { MenuLateralComponent } from './menu-lateral/menu-lateral.component';
+import { FooterComponent } from './footer/footer.component';
+import { ContenidoComponent } from './contenido/contenido.component';
 
 //PRIMENG MODULES
 import { DataTableModule, InputTextareaModule, PanelModule, DropdownModule, ButtonModule, DialogModule, ConfirmationService, ConfirmDialogModule, SharedModule, EditorModule, FileUploadModule, MenuItem, MenuModule } from 'primeng/primeng';
@@ -43,10 +43,10 @@ import { SDKBrowserModule } from './shared/services/lbsdk/index';
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponenteComponent,
-    MenuLateralComponenteComponent,
-    FooterComponenteComponent,
-    ContenidoComponenteComponent,
+    HeaderComponent,
+    MenuLateralComponent,
+    FooterComponent,
+    ContenidoComponent,
     ListaClientes,
     FormularioCliente,
     ListaPedidoVenta,

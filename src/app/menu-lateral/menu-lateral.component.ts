@@ -3,11 +3,11 @@ import { ClienteService, PedidoVentaService, Cliente, Pedidoventa } from '../sha
 import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-menu-lateral-componente',
-  templateUrl: './menu-lateral-componente.component.html',
-  styleUrls: ['./menu-lateral-componente.component.css']
+  selector: 'app-menu-lateral',
+  templateUrl: './menu-lateral.component.html',
+  styleUrls: ['./menu-lateral.component.css']
 })
-export class MenuLateralComponenteComponent implements OnInit {
+export class MenuLateralComponent implements OnInit {
 
   constructor(private clienteService: ClienteService, private pedidoVentaService: PedidoVentaService,private router: Router) { }
   
