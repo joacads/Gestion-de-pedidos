@@ -1,4 +1,4 @@
-//ANGULAR
+//CORE
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-//CUERPO TEMPLATE
+//TEMPLATE
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponenteComponent } from './header-componente/header-componente.component';
@@ -14,10 +14,10 @@ import { MenuLateralComponenteComponent } from './menu-lateral-componente/menu-l
 import { FooterComponenteComponent } from './footer-componente/footer-componente.component';
 import { ContenidoComponenteComponent } from './contenido-componente/contenido-componente.component';
 
-//ADICION
+//PRIMENG MODULES
 import { DataTableModule, InputTextareaModule, PanelModule, DropdownModule, ButtonModule, DialogModule, ConfirmationService, ConfirmDialogModule, SharedModule, EditorModule, FileUploadModule, MenuItem, MenuModule } from 'primeng/primeng';
 
-//COMPONENTES SISTEMA
+//COMPONENTS
 import { ListaClientes } from './lista-clientes/lista-clientes.component';
 import { FormularioCliente } from './formulario-cliente/formulario-cliente.component';
 import { ListaPedidoVenta } from './lista-pedido-venta/lista-pedido-venta.component';
@@ -29,7 +29,7 @@ import { FormularioRubro } from './formulario-rubro/formulario-rubro.component';
 import { ListaDetallePedidoVentaComponent } from './lista-detalle-pedido-venta/lista-detalle-pedido-venta.component';
 import { FormularioDetallePedidoVentaComponent } from './formulario-detalle-pedido-venta/formulario-detalle-pedido-venta.component';
 
-//SERVICIOS
+//SERVICES
 import { ClienteService } from './shared/services/cliente.service'
 import { PedidoVentaService } from './shared/services/pedido-venta.service'
 import { ArticuloService } from './shared/services/articulo.service'
@@ -37,7 +37,7 @@ import { RubroService } from './shared/services/rubro.service';
 import { DomicilioService } from './shared/services/domicilio.service';
 import { DetallePedidoVentaService } from './shared/services/detalle-pedido-venta.service';
 
-//
+//SDK MODULE
 import { SDKBrowserModule } from './shared/services/lbsdk/index';
 
 @NgModule({
