@@ -7,20 +7,28 @@
     <ul class="sidebar-menu">
       <li class="header">NAVEGACIÓN PRINCIPAL</li>
       <li class="active treeview">
-        <a (click)="irListaClientes()">
-          <i class="fa fa-edit"></i> <span>Lista de clientes</span>
-          </a>
+        <a routerLink="/listaClientes">
+          <i class="fa fa-edit"></i>
+          <span>Lista de clientes</span>
+        </a>
       </li>
       <li class="treeview">
         <a href="#">
-          <i class="fa fa-table"></i> <span>Gestor articulo y rubro</span>
+          <i class="fa fa-table"></i>
+          <span>Gestión articulo y rubro</span>
           <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
         </a>
         <ul class="treeview-menu">
-          <li><a routerLink="/listaArticulos" routerLinkActive="active"><i class="fa fa-circle-o"></i> Articulos</a></li>
-          <li><a routerLink="/listaRubros" routerLinkActive="active"><i class="fa fa-circle-o"></i> Rubros</a></li>
+          <li>
+            <a routerLink="/listaArticulos" routerLinkActive="active">
+              <i class="fa fa-circle-o"></i> Articulos</a>
+          </li>
+          <li>
+            <a routerLink="/listaRubros" routerLinkActive="active">
+              <i class="fa fa-circle-o"></i> Rubros</a>
+          </li>
         </ul>
       </li>
     </ul>
