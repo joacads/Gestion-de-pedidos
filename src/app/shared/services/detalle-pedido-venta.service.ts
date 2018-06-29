@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { PedidoventadetalleApi, Pedidoventadetalle, LoopBackConfig } from '../services/lbsdk/index';
+import { PedidoventadetalleApi, Pedidoventadetalle, LoopBackConfig, LoopBackFilter } from '../services/lbsdk/index';
 import { API_VERSION, BASE_URL } from '../services/lb.base.url';
 
 @Injectable()
@@ -11,8 +11,8 @@ export class DetallePedidoVentaService {
     LoopBackConfig.setBaseURL(BASE_URL);
     LoopBackConfig.setApiVersion(API_VERSION);
   }
-  getAll(): Observable<Pedidoventadetalle[]> {
-    return this.pedidoVentaDetalleeApi.find();
+  getAll(filter?: LoopBackFilter): Observable<Pedidoventadetalle[]> {
+    return this.pedidoVentaDetalleeApi.find(filter);
   }
   getByClientId(idcliente: number): Observable<Pedidoventadetalle[]> {
     return this.pedidoVentaDetalleeApi.find({ where: { idcliente: idcliente } });

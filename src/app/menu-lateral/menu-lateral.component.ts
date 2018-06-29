@@ -13,11 +13,5 @@ export class MenuLateralComponent implements OnInit {
   
   ngOnInit() {
   }
-  irListaClientes() {
-    let cliente= new Cliente();
-    let pedidoventa = new Pedidoventa();
-    this.clienteService.clienteActual = cliente;
-    this.pedidoVentaService.pedidoVentaActual = pedidoventa;
-    this.router.navigate(['listaClientes'])
-  }
+  
 }

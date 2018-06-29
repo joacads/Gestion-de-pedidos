@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ClienteService, Cliente, LoggerService } from '../shared/services/index';
+import { ClienteService, Cliente, PedidoVentaService, Pedidoventa } from '../shared/services/index';
 
 @Component({
   selector: 'app-lista-clientes',
@@ -10,47 +10,90 @@ import { ClienteService, Cliente, LoggerService } from '../shared/services/index
 export class ListaClientes implements OnInit {
 
   listaCliente: Cliente[];
-  constructor(private clienteService: ClienteService, private log: LoggerService, private router: Router) { }
+  cliente: Cliente = new Cliente();
+
+  constructor(
+    private clienteService: ClienteService,
+    private pedidoventaService: PedidoVentaService,
+    private router: Router
+
+  ) { }
 
   ngOnInit() {
     this.recargarListaClientes();
   }
 
   private recargarListaClientes() {
-    this.clienteService.getAll().subscribe((clientes: Cliente[]) => {
-      this.listaCliente = clientes
-    })
+    this.clienteService.getAll()
+      .subscribe((clientes: Cliente[]) => {
+        this.listaCliente = clientes
+      })
   }
 
   agregar() {
     let cliente: Cliente = new Cliente();
-    this.clienteService.clienteActual = cliente;
     this.router.navigate(['formularioCliente']);
   }
+
   editar() {
-    if (this.clienteService.esClienteExistente()) {
-      this.router.navigate(['formularioCliente']);
+    if (this.cliente.idcliente) {
+      let parametros: any[] = [];
+      parametros.push(this.cliente.idcliente);
+      this.router.navigate(['formularioCliente'], { queryParams: { array: parametros } });
     } else {
       alert("Seleccionar un cliente!");
     }
   }
+
   delete() {
-    if (this.clienteService.esClienteExistente()) {
-      this.clienteService.delete(this.clienteService.clienteActual).subscribe(() => {
-        this.recargarListaClientes();
-      })
+    if (this.cliente.idcliente) {
+      this.clienteService.delete(this.cliente)
+        .subscribe(() => {
+          this.recargarListaClientes();
+        })
     } else {
       alert("Seleccionar un cliente!");
     }
   }
 
   onRowSelect(event) {
-    this.clienteService.clienteActual = <Cliente>event.data;
+    this.cliente = <Cliente>event.data;
+  }
+
+  onRowUnselect(event) {
+    this.cliente = new Cliente();
   }
 
   pedidoVenta() {
-    if (this.clienteService.esClienteExistente()) {
-      this.router.navigate(['listaPedidoVenta']);
+    if (this.cliente.idcliente) {
+      let parametros: any[] = [];
+      parametros.push(this.cliente.idcliente);
+      this.router.navigate(['listaPedidoVenta'], { queryParams: { array: parametros } });
+    } else {
+      alert("Seleccionar un cliente!");
+    }
+  }
+
+  calcularSaldo() {
+    /* El campo saldo del Cliente deberá calcularse según los pedidos asociados que 
+    posea siendo negativo el saldo cuando posea pedidos cuyo estado es pendiente o enviado. 
+    El saldo nunca debe ser mayor a cero. */
+    if (this.cliente.idcliente) {
+      this.pedidoventaService.getByClientId(this.cliente.idcliente)
+        .subscribe((listaPedidosVenta: Pedidoventa[]) => {
+          let saldoAux = 0;
+          listaPedidosVenta.forEach(pedidoventa => {
+            if (pedidoventa.estado == "pendiente" || pedidoventa.estado == "enviado") {
+              saldoAux = - pedidoventa.montototal;
+            }
+          });
+          this.cliente.saldo = saldoAux;
+          this.clienteService.update(this.cliente)
+            .subscribe(() => {
+              this.cliente = new Cliente();
+              this.recargarListaClientes
+            })
+        })
     } else {
       alert("Seleccionar un cliente!");
     }

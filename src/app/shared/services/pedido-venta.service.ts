@@ -1,28 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { PedidoventaApi, Pedidoventa, Domicilio, LoopBackConfig } from '../services/lbsdk/index';
+import { PedidoventaApi, Pedidoventa, Domicilio, LoopBackConfig, LoopBackFilter } from '../services/lbsdk/index';
 import { API_VERSION, BASE_URL } from '../services/lb.base.url';
 
 @Injectable()
 export class PedidoVentaService {
 
-  public pedidoVentaActual: Pedidoventa = new Pedidoventa();
-  public inludedObject: any = { include: 'domicilio' };
-
   constructor(private pedidoVentaApi: PedidoventaApi) {
     LoopBackConfig.setBaseURL(BASE_URL);
     LoopBackConfig.setApiVersion(API_VERSION);
-    this.pedidoVentaActual.domicilio = new Domicilio();
   }
 
-  getAll(): Observable<Pedidoventa[]> {
-    return this.pedidoVentaApi.find(this.inludedObject);
+  getAll(filter?: LoopBackFilter): Observable<Pedidoventa[]> {
+    return this.pedidoVentaApi.find(filter);
   }
   getByClientId(idcliente: number): Observable<Pedidoventa[]> {
     return this.pedidoVentaApi.find({ where: { idcliente: idcliente }, include: 'domicilio' });
   }
   getPedidoVentaById(id: number): Observable<Pedidoventa> {
-    return this.pedidoVentaApi.findById(id);
+    return this.pedidoVentaApi.findById(id, { include: 'domicilio' });
   }
   create(pedidoVenta: Pedidoventa): Observable<Pedidoventa> {
     pedidoVenta.entregado = pedidoVenta.entregado;
@@ -33,8 +29,5 @@ export class PedidoVentaService {
   }
   delete(pedidoVenta: Pedidoventa): Observable<{}> {
     return this.pedidoVentaApi.deleteById(pedidoVenta.idpedidoventa);
-  }
-  espedidoVentaExistente(): boolean {
-    return this.pedidoVentaActual.idpedidoventa != null;
   }
 }

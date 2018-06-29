@@ -29,8 +29,8 @@
         </div>
         <div class="col-md-9">
           <div class="form-group">
-            <select formControlName="rubro" id="idrubro" class="form-control" [(ngModel)]="rubro.idrubro">
-              <option *ngFor="let rubro of opcionRubro" [ngValue]="rubro">{{rubro.denominacion}}</option>
+            <select formControlName="rubro" id="idrubro" class="form-control" [(ngModel)]="articulo.idrubro">
+              <option *ngFor="let rubro of rubros" [ngValue]="rubro.idrubro">{{rubro.denominacion}}</option>
             </select>
           </div>  
         </div>
@@ -63,5 +63,6 @@
         <button type="submit" class="btn btn-success btn-lg" style="float: right; margin-right: 10px" (click)="volver()">Regresar</button>
       </div>
     </form>
+    {{articulo | json}}
   </div>
 </div>

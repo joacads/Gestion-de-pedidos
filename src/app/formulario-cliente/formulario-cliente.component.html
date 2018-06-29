@@ -6,7 +6,7 @@
         <div class="col-md-6">
           <div class="form-group">
             <label for="razonsocial">Razon social</label>
-            <input formControlName="razonsocial" type="text" id="razonsocial" class="form-control" [(ngModel)]="clienteServices.clienteActual.razonsocial">
+            <input formControlName="razonsocial" type="text" id="razonsocial" class="form-control" [(ngModel)]="cliente.razonsocial">
             <div *ngIf="formularioCliente.get('razonsocial').errors && formularioCliente.get('razonsocial').dirty" class="alert alert-danger">
               <p *ngIf="formularioCliente.get('razonsocial').hasError('required')">Este campo es obligatorio</p>
             </div>
@@ -15,7 +15,7 @@
         <div class="col-md-6">
           <div class="form-group">
             <label for="cuit">Cuit</label>
-            <input formControlName="cuit" type="number" id="cuit" class="form-control" [(ngModel)]="clienteServices.clienteActual.cuit">
+            <input formControlName="cuit" type="number" id="cuit" class="form-control" [(ngModel)]="cliente.cuit">
             <div *ngIf="formularioCliente.get('cuit').errors && formularioCliente.get('cuit').dirty" class="alert alert-danger">
               <p *ngIf="formularioCliente.get('cuit').hasError('required')">Este campo es obligatorio</p>
               <p *ngIf="formularioCliente.get('cuit').hasError('pattern') || formularioCliente.get('cuit').hasError('maxlength')">Ingrese un cuit válido</p>
@@ -27,7 +27,7 @@
         <div class="col-md-4">
           <div class="form-group">
             <label for="calle">Calle</label>
-            <input formControlName="calle" type="text" id="calle" class="form-control" [(ngModel)]="clienteServices.clienteActual.domicilio.calle">
+            <input formControlName="calle" type="text" id="calle" class="form-control" [(ngModel)]="cliente.domicilio.calle">
             <div *ngIf="formularioCliente.get('calle').errors && formularioCliente.get('calle').dirty" class="alert alert-danger">
               <p *ngIf="formularioCliente.get('calle').hasError('required')">Este campo es obligatorio</p>
             </div>
@@ -36,7 +36,7 @@
         <div class="col-md-4">
           <div class="form-group">
             <label for="numero">Numero</label>
-            <input formControlName="numero" type="number" id="numero" class="form-control" [(ngModel)]="clienteServices.clienteActual.domicilio.numero">
+            <input formControlName="numero" type="number" id="numero" class="form-control" [(ngModel)]="cliente.domicilio.numero">
             <div *ngIf="formularioCliente.get('numero').errors && formularioCliente.get('numero').dirty" class="alert alert-danger">
               <p *ngIf="formularioCliente.get('numero').hasError('required')">Este campo es obligatorio</p>
               <p *ngIf="formularioCliente.get('numero').hasError('pattern') || formularioCliente.get('numero').hasError('maxlength')">Ingrese un numero válido</p>
@@ -46,7 +46,7 @@
         <div class="col-md-4">
           <div class="form-group">
             <label for="localidad">Localidad</label>
-            <input formControlName="localidad" type="text" id="localidad" class="form-control" [(ngModel)]="clienteServices.clienteActual.domicilio.localidad">
+            <input formControlName="localidad" type="text" id="localidad" class="form-control" [(ngModel)]="cliente.domicilio.localidad">
             <div *ngIf="formularioCliente.get('localidad').errors && formularioCliente.get('localidad').dirty" class="alert alert-danger">
               <p *ngIf="formularioCliente.get('localidad').hasError('required')">Este campo es obligatorio</p>
             </div>

@@ -1,16 +1,10 @@
 <div class="box box-primary">
   <div class="box-header with-border">
 
-    <h2>Lista de Pedidos de venta: <strong>{{clienteService.clienteActual.razonsocial}}</strong></h2>
-
-    <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
-      <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-      <input #gb type="text" pInputText size="50" placeholder="Buscar">
-      <label for=""></label>
-    </div>
-
+    <h2>Lista de Pedidos de venta: <strong>{{cliente.razonsocial}}</strong></h2>
+    
     <p-dataTable [value]="listaPedidoVenta" selectionMode="single" sortMode="single" reorderableColumns="true" [globalFilter]="gb"
-      scrollable="true" scrollHeight="450px" columnResizeMode="expand" [(selection)]="pedidoventaSeleccionado" (onRowSelect)="onRowSelect($event)"
+      scrollable="true" scrollHeight="450px" columnResizeMode="expand" [(selection)]="pedidoVenta" (onRowSelect)="onRowSelect($event)"
       [paginator]="true" rows="15" [responsive]="true">
 
       <p-header>
@@ -22,12 +16,14 @@
         </div>
       </p-header>
 
-      <p-column field="idpedidoventa" header="Id" [sortable]="true" [style]="{'width': '100px'}"></p-column>
-      <p-column field="fechaentrega" header="Fecha de entrega" [sortable]="false" [style]="{'width': '200px'}"></p-column>
-      <p-column field="estado" header="Estado" [sortable]="false" [style]="{'width': '200px'}"></p-column>
-      <p-column field="fechapedido" header="Fecha de pedido" [sortable]="false" [style]="{'width': '200px'}"></p-column>
-      <p-column field="montototal" header="Monto total" [sortable]="false" [style]="{'width': '200px'}"></p-column>
+      <p-column field="idpedidoventa" header="Id" [sortable]="true"></p-column>
+      <p-column field="fechaentrega" header="Fecha de entrega" [sortable]="false"></p-column>
+      <p-column field="estado" header="Estado" [sortable]="false"></p-column>
+      <p-column field="fechapedido" header="Fecha de pedido" [sortable]="false"></p-column>
+      <p-column field="subtotal" header="Sub total" [sortable]="false"></p-column>
+      <p-column field="montototal" header="Monto total" [sortable]="false"></p-column>
     </p-dataTable>
+    <br>
 
   </div>
 </div>

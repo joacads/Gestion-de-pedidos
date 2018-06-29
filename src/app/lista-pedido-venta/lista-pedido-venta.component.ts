@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterModule, Routes, Router } from '@angular/router';
+import { RouterModule, Routes, Router, ActivatedRoute } from '@angular/router';
 import { PedidoVentaService, Pedidoventa, LoggerService, ClienteService, Cliente } from '../shared/services/index';
 
 @Component({
@@ -10,51 +10,74 @@ import { PedidoVentaService, Pedidoventa, LoggerService, ClienteService, Cliente
 
 export class ListaPedidoVenta implements OnInit {
 
-  listaPedidoVenta: Pedidoventa[];
-  constructor(private pedidoVentaService: PedidoVentaService, private log: LoggerService, private router: Router, private clienteService: ClienteService) {
-  }
+  listaPedidoVenta: Pedidoventa[] = [];
+  pedidoVenta: Pedidoventa = new Pedidoventa();
+  cliente: Cliente = new Cliente();
+
+  constructor(
+    private pedidoVentaService: PedidoVentaService,
+    private log: LoggerService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private clienteService: ClienteService
+  ) { }
+
   ngOnInit() {
-    console.log(this.clienteService.clienteActual)
-    this.recargarPedidoVentasDelCliente();
+    this.activatedRoute.queryParams.subscribe
+    this.activatedRoute.queryParams
+      .subscribe(parametros => {
+        let aux: string = JSON.stringify(parametros)
+        if (aux.length > 2) {
+          let idCliente = parametros.array[0];
+          this.clienteService.getClienteById(idCliente)
+            .subscribe((cliente: Cliente) => {
+              this.cliente = cliente;
+              this.listarPedidosVentaPorId(this.cliente.idcliente);
+            })
+        }
+      })
   }
 
-  private recargarPedidoVentasDelCliente() {
-    if (this.clienteService.esClienteExistente()) {
-      this.pedidoVentaService.getByClientId(this.clienteService.clienteActual.idcliente)
-        .subscribe((pedidoVenta: Pedidoventa[]) => {
-          this.listaPedidoVenta = pedidoVenta;
-        })
-    }
+  listarPedidosVentaPorId(id: Number) {
+    this.pedidoVentaService.getAll({ where: { idcliente: id } })
+      .subscribe((pedidoVentas: Pedidoventa[]) => {
+        console.log(pedidoVentas)
+        this.listaPedidoVenta = pedidoVentas;
+      })
+
   }
 
   agregar() {
-    let pedidoVenta: Pedidoventa = new Pedidoventa();
-    this.pedidoVentaService.pedidoVentaActual = pedidoVenta;
-    this.router.navigate(['formularioPedidoVenta']);
+    let parametros: any[] = [];
+    parametros.push(this.cliente.idcliente);
+    this.router.navigate(['formularioPedidoVenta'], { queryParams: { array: parametros } });
   }
 
   delete() {
-    if (this.pedidoVentaService.espedidoVentaExistente()) {
-      this.pedidoVentaService.delete(this.pedidoVentaService.pedidoVentaActual)
-      .subscribe(() => {
-        this.recargarPedidoVentasDelCliente();
-      })
+    if (this.pedidoVenta.idpedidoventa) {
+      this.pedidoVentaService.delete(this.pedidoVenta)
+        .subscribe(() => {
+          this.listarPedidosVentaPorId(this.cliente.idcliente);
+        })
     } else {
       alert("Seleccionar un pedido de venta!");
     }
   }
 
   editar() {
-    if (this.pedidoVentaService.espedidoVentaExistente()) {
-      this.router.navigate(['formularioPedidoVenta']);
+    if (this.pedidoVenta.idpedidoventa) {
+      let parametros: any[] = [];
+      parametros.push(this.cliente.idcliente);
+      parametros.push(this.pedidoVenta.idpedidoventa);
+      this.router.navigate(['formularioPedidoVenta'], { queryParams: { array: parametros } });
     } else {
       alert("Seleccionar un pedido de venta!");
     }
   }
   onRowSelect(event) {
-    console.log(<Pedidoventa>event.data)
-    this.pedidoVentaService.pedidoVentaActual = <Pedidoventa>event.data;
+    this.pedidoVenta = <Pedidoventa>event.data;
   }
+
   volver() {
     this.router.navigate(['listaClientes']);
   }

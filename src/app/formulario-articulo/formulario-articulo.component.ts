@@ -14,9 +14,7 @@ export class FormularioArticulo implements OnInit {
   articulo: Articulo;
   articuloAux: Articulo;
   formularioArticulo: FormGroup;
-  rubro: Rubro;
-
-  articuloSeleccionado: Articulo = new Articulo();
+  rubros: Rubro[] = [];
 
   constructor(public fb: FormBuilder, private articuloService: ArticuloService, private rubroService: RubroService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.formularioArticulo = this.fb.group({
@@ -28,18 +26,16 @@ export class FormularioArticulo implements OnInit {
     });
     this.articulo = this.articuloService.articuloActual;
     this.articuloAux = new Articulo();
-
-    this.rubro = new Rubro();
   }
+  
   ngOnInit() {
     this.obtenerRubros();
   }
   
-  private opcionRubro: Rubro[] = [];
   obtenerRubros() {
     this.rubroService.getAll()
     .subscribe((rubros: Rubro[]) => {
-      this.opcionRubro = rubros;
+      this.rubros = rubros;
     })
   }
 
@@ -48,8 +44,8 @@ export class FormularioArticulo implements OnInit {
   }
 
   save() {
-    if (this.articulo.idarticulo == -1) {
-      this.articulo.idrubro = this.rubro.idrubro;
+    if (!this.articulo.idarticulo) {
+      console.log(this.articulo)
       this.articulo.idarticulo = this.articuloAux.idarticulo;
       this.articuloService.create(this.articulo)
         .subscribe((articulo: Articulo) => {

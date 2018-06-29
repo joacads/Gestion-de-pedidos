@@ -9,8 +9,8 @@
     </div>
 
     <p-dataTable [value]="listaCliente" selectionMode="single" sortMode="single" reorderableColumns="true" [globalFilter]="gb"
-      scrollable="true" scrollHeight="450px" columnResizeMode="expand" [(selection)]="clienteSeleccionado" (onRowSelect)="onRowSelect($event)"
-      [paginator]="true" rows="15" [responsive]="true">
+      scrollable="true" scrollHeight="450px" columnResizeMode="expand" [(selection)]="cliente" (onRowUnselect)="onRowUnselect($event)"
+      (onRowSelect)="onRowSelect($event)" [paginator]="true" rows="15" [responsive]="true">
 
       <p-header>
         <div class="ui-helper-clearfix" style="width:100%">
@@ -27,6 +27,8 @@
       <p-column field="cuit" header="Cuit" [sortable]="false" [style]="{'width': '200px'}"></p-column>
       <p-column field="saldo" header="Saldo" [sortable]="false" [style]="{'width': '200px'}"></p-column>
     </p-dataTable>
+    <br>
+    <button type="button" class="btn btn-success btn-lg" style="float: right;" (click)="calcularSaldo()">Calcular saldo</button>
 
   </div>
 </div>

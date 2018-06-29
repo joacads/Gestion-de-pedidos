@@ -7,13 +7,11 @@ import "rxjs/add/operator/mergeMap";
 @Injectable()
 export class ClienteService {
 
-  public clienteActual: Cliente = new Cliente();
   public inludedObject: any = { include: 'domicilio' };
 
   constructor(private clienteApi: ClienteApi) {
     LoopBackConfig.setBaseURL(BASE_URL);
     LoopBackConfig.setApiVersion(API_VERSION);
-    this.clienteActual.domicilio = new Domicilio();
   }
 
   getAll(): Observable<Cliente[]> {
@@ -34,10 +32,6 @@ export class ClienteService {
 
   delete(cliente: Cliente): Observable<{}> {
     return this.clienteApi.deleteById(cliente.idcliente);
-  }
-
-  esClienteExistente(): boolean {
-    return this.clienteActual.idcliente != null;
   }
 
 }
