@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule, Routes, Router, ActivatedRoute } from '@angular/router';
-import { PedidoVentaService, Pedidoventa, LoggerService, ClienteService, Cliente } from '../shared/services/index';
+import { PedidoVentaService, Pedidoventa, LoggerService, ClienteService, Cliente, DetallePedidoVentaService, Pedidoventadetalle, DomicilioService } from '../shared/services/index';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-lista-pedido-venta',
@@ -13,13 +14,16 @@ export class ListaPedidoVenta implements OnInit {
   listaPedidoVenta: Pedidoventa[] = [];
   pedidoVenta: Pedidoventa = new Pedidoventa();
   cliente: Cliente = new Cliente();
+  arrayObservable: Array<Observable<any>>;
 
   constructor(
     private pedidoVentaService: PedidoVentaService,
     private log: LoggerService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private clienteService: ClienteService
+    private clienteService: ClienteService,
+    private pedidoVentaDetalleService: DetallePedidoVentaService,
+    private domicilioservice: DomicilioService
   ) { }
 
   ngOnInit() {
@@ -41,7 +45,6 @@ export class ListaPedidoVenta implements OnInit {
   listarPedidosVentaPorId(id: Number) {
     this.pedidoVentaService.getAll({ where: { idcliente: id } })
       .subscribe((pedidoVentas: Pedidoventa[]) => {
-        console.log(pedidoVentas)
         this.listaPedidoVenta = pedidoVentas;
       })
 
@@ -55,9 +58,23 @@ export class ListaPedidoVenta implements OnInit {
 
   delete() {
     if (this.pedidoVenta.idpedidoventa) {
-      this.pedidoVentaService.delete(this.pedidoVenta)
-        .subscribe(() => {
-          this.listarPedidosVentaPorId(this.cliente.idcliente);
+
+      this.pedidoVentaDetalleService.getAll({ where: { idpedidoventa: this.pedidoVenta.idpedidoventa } })
+        .subscribe((listaPedidoVentaDetalle: Pedidoventadetalle[]) => {
+          this.arrayObservable = new Array<Observable<any>>();
+          listaPedidoVentaDetalle.forEach(pedidoVenta => {
+            this.arrayObservable.push(this.pedidoVentaDetalleService.delete(pedidoVenta));
+          });
+          Observable.merge(this.arrayObservable)
+            .subscribe(response => {
+              this.pedidoVentaService.delete(this.pedidoVenta)
+                .subscribe(() => {
+                  this.domicilioservice.delete(this.pedidoVenta.iddomicilio)
+                    .subscribe(() => {
+                      this.listarPedidosVentaPorId(this.cliente.idcliente);
+                    })
+                })
+            })
         })
     } else {
       alert("Seleccionar un pedido de venta!");

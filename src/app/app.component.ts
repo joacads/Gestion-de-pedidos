@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { LoopBackConfig } from './shared/services/lbsdk/index';
+import * as $ from "jquery";
+import { SingletonService } from './shared/services';
 
 @Component({
   selector: 'app-root',
@@ -7,16 +9,14 @@ import { LoopBackConfig } from './shared/services/lbsdk/index';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
-  constructor() {
 
-    //LoopBackConfig.setDebugMode(false);
-    /*
-    LoopBackConfig.setBaseURL('http://127.0.0.1:3000');
-    LoopBackConfig.setApiVersion('api');
-    LoopBackConfig.setDebugMode(true); // defaults true
-    console.log('Component is Loaded');
-    */
-    
+  ua = navigator.userAgent;
+
+  constructor( private singletonService: SingletonService ) {
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(this.ua)) {
+      this.singletonService.isMobile = true;
+    } else if (/Chrome/i.test(this.ua)) {
+      this.singletonService.isMobile = false;
+    }
   }
 }

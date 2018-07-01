@@ -23,7 +23,7 @@ export class DomicilioService {
         return this.domicilioApi.patchAttributes(domicilio.iddomicilio, domicilio);
     }
 
-    delete(domicilio: Domicilio): Observable<{}> {
-        return this.domicilioApi.deleteById(domicilio.iddomicilio);
+    delete(iddomicilio: number): Observable<{}> {
+        return this.domicilioApi.deleteById(iddomicilio);
     }
 }

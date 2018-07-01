@@ -37,8 +37,6 @@ export class FormularioRubro implements OnInit {
   }
 
   save() {
-    
-    console.log(this.rubroService.rubroActual.idrubro);
     if (this.rubroService.rubroActual.idrubro == null) {
       this.rubroService.create(this.rubroService.rubroActual)
         .subscribe((rubro: Rubro) => {

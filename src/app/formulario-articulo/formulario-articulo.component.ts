@@ -45,7 +45,6 @@ export class FormularioArticulo implements OnInit {
 
   save() {
     if (!this.articulo.idarticulo) {
-      console.log(this.articulo)
       this.articulo.idarticulo = this.articuloAux.idarticulo;
       this.articuloService.create(this.articulo)
         .subscribe((articulo: Articulo) => {

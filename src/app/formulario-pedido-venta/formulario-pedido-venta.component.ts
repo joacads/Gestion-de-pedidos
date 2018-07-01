@@ -66,7 +66,7 @@ export class FormularioPedidoVenta implements OnInit {
             this.pedidoVentaService.getPedidoVentaById(idPedidoVenta)
               .subscribe((pedidoVenta: Pedidoventa) => {
                 this.pedidoVenta = pedidoVenta;
-                this.listarPedidosVentaDetalle();
+                this.listarPedidosVentaDetalle(this.pedidoVenta.idpedidoventa);
                 this.listarArticulos();
               })
           }
@@ -115,18 +115,18 @@ export class FormularioPedidoVenta implements OnInit {
     this.pedidoVentaDetalleService.create(this.pedidoVentaDetalle)
       .subscribe((pedidoventaDetalle) => {
         /*El campo subtotal de pedido de venta será el resultante de la suma de los subtotales de los detalles del pedido.*/
-        this.pedidoVenta.subtotal = + pedidoventaDetalle.subtotal;
+        this.pedidoVenta.subtotal = (pedidoventaDetalle.subtotal * pedidoventaDetalle.cantidad) * (pedidoventaDetalle.porcentajedescuento / 100);
         this.pedidoVentaService.update(this.pedidoVenta).subscribe(() => {
           this.pedidoVentaDetalle = new Pedidoventadetalle();
-          this.listarPedidosVentaDetalle();
+          this.listarPedidosVentaDetalle(this.pedidoVenta.idpedidoventa);
         })
       })
   }
 
-  listarPedidosVentaDetalle() {
-    this.pedidoVentaDetalleService.getAll({ include: 'articulo' })
+  listarPedidosVentaDetalle(idpedidoventa: number) {
+    this.pedidoVentaDetalleService.getAll({where: { idpedidoventa: idpedidoventa}, include: 'articulo' })
       .subscribe((listaPedidosVentaDetalle: Pedidoventadetalle[]) => {
-        this.pedidosVentaDetalles = listaPedidosVentaDetalle
+        this.pedidosVentaDetalles = listaPedidosVentaDetalle;
       })
   }
 

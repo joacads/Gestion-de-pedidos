@@ -22,10 +22,11 @@
         </div>
       </p-header>
 
-      <p-column field="idcliente" header="Id" [sortable]="true" [style]="{'width': '100px'}"></p-column>
-      <p-column field="razonsocial" header="Razon social" [sortable]="false" [style]="{'width': '200px'}"></p-column>
-      <p-column field="cuit" header="Cuit" [sortable]="false" [style]="{'width': '200px'}"></p-column>
-      <p-column field="saldo" header="Saldo" [sortable]="false" [style]="{'width': '200px'}"></p-column>
+      <p-column field="idcliente" header="Id" [sortable]="true"></p-column>
+      <p-column field="razonsocial" header="Razon social" [sortable]="false"></p-column>
+      <p-column field="cuit" header="Cuit" [sortable]="false"></p-column>
+      <p-column field="domicilio.localidad" header="Localidad" [sortable]="false"></p-column>
+      <p-column field="saldo" header="Saldo" [sortable]="false"></p-column>
     </p-dataTable>
     <br>
     <button type="button" class="btn btn-success btn-lg" style="float: right;" (click)="calcularSaldo()">Calcular saldo</button>
