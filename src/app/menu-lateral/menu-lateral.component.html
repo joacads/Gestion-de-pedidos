@@ -12,7 +12,7 @@
           <span>Lista de clientes</span>
         </a>
       </li>
-      <li class="treeview">
+      <li class="treeview" *ngIf="!singletonService.isMobile">
         <a href="#">
           <i class="fa fa-table"></i>
           <span>Gestión articulo y rubro</span>

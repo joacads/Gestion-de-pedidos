@@ -93,6 +93,17 @@ export class FormularioPedidoVenta implements OnInit {
           let parametros: any[] = [];
           parametros.push(this.idCliente);
           this.router.navigate(['listaPedidoVenta'], { queryParams: { array: parametros } });
+        }, (e) => {
+          if (!localStorage.getItem("pedidoVenta2")) {
+
+            localStorage.setItem("domicilio", JSON.stringify(this.pedidoVenta.domicilio))
+            localStorage.setItem("pedidoVenta2", JSON.stringify(this.pedidoVenta))
+            let parametros: any[] = [];
+            parametros.push(this.idCliente);
+            this.router.navigate(['listaPedidoVenta'], { queryParams: { array: parametros } });
+          } else {
+            alert("Primero se debe sincronizar el pedido venta actual!")
+          }
         })
     } else {
       /* El campo monto Total de pedido de venta será el resultante de la suma del campo subtotal + los gastos de envió. */
@@ -124,7 +135,7 @@ export class FormularioPedidoVenta implements OnInit {
   }
 
   listarPedidosVentaDetalle(idpedidoventa: number) {
-    this.pedidoVentaDetalleService.getAll({where: { idpedidoventa: idpedidoventa}, include: 'articulo' })
+    this.pedidoVentaDetalleService.getAll({ where: { idpedidoventa: idpedidoventa }, include: 'articulo' })
       .subscribe((listaPedidosVentaDetalle: Pedidoventadetalle[]) => {
         this.pedidosVentaDetalles = listaPedidosVentaDetalle;
       })

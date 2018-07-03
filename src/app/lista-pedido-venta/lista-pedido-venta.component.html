@@ -10,8 +10,8 @@
       <p-header>
         <div class="ui-helper-clearfix" style="width:100%">
           <button type="button" pButton icon="fa-plus" style="float:left" (click)="agregar()" label="Nuevo"></button>
-          <button type="button" pButton icon="fa-edit" style="float:left" (click)="editar()" label="Modificar"></button>
-          <button type="button" pButton icon="fa-remove" style="float:left" (click)="delete()" label="Eliminar"></button>
+          <button type="button" pButton icon="fa-edit" style="float:left" (click)="editar()" label="Modificar" *ngIf="!sinConexion"></button>
+          <button type="button" pButton icon="fa-remove" style="float:left" (click)="delete()" label="Eliminar" *ngIf="!sinConexion"></button>
           <button type="button" pButton icon="fa-reply" style="float:right" (click)="volver()" label="Regresar"></button>
         </div>
       </p-header>
@@ -24,6 +24,6 @@
       <p-column field="montototal" header="Monto total" [sortable]="false"></p-column>
     </p-dataTable>
     <br>
-
+    <button type="submit" class="btn btn-success btn-lg" style="float: right;" (click)="sincronizar()" *ngIf="singletonService.isMobile">Sincronizar</button>
   </div>
 </div>

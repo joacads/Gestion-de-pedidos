@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ClienteService, PedidoVentaService, Cliente, Pedidoventa } from '../shared/services/index';
+import { ClienteService, PedidoVentaService, Cliente, Pedidoventa, SingletonService } from '../shared/services/index';
 import {Router} from '@angular/router';
 
 @Component({
@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
 })
 export class MenuLateralComponent implements OnInit {
 
-  constructor(private clienteService: ClienteService, private pedidoVentaService: PedidoVentaService,private router: Router) { }
+  constructor(private singletonService: SingletonService, private clienteService: ClienteService, private pedidoVentaService: PedidoVentaService,private router: Router) { }
   
   ngOnInit() {
   }

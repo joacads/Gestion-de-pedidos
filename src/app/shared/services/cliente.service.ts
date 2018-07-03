@@ -7,7 +7,7 @@ import "rxjs/add/operator/mergeMap";
 @Injectable()
 export class ClienteService {
 
-  public inludedObject: any = { include: 'domicilio' };
+  private inludedObject: any = { include: 'domicilio' };
 
   constructor(private clienteApi: ClienteApi) {
     LoopBackConfig.setBaseURL(BASE_URL);

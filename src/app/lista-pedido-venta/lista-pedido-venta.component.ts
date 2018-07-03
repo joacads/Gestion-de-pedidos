@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule, Routes, Router, ActivatedRoute } from '@angular/router';
-import { PedidoVentaService, Pedidoventa, LoggerService, ClienteService, Cliente, DetallePedidoVentaService, Pedidoventadetalle, DomicilioService } from '../shared/services/index';
+import { PedidoVentaService, Pedidoventa, LoggerService, ClienteService, Cliente, DetallePedidoVentaService, Pedidoventadetalle, DomicilioService, SingletonService, Domicilio } from '../shared/services/index';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -14,7 +14,7 @@ export class ListaPedidoVenta implements OnInit {
   listaPedidoVenta: Pedidoventa[] = [];
   pedidoVenta: Pedidoventa = new Pedidoventa();
   cliente: Cliente = new Cliente();
-  arrayObservable: Array<Observable<any>>;
+  sinConexion: boolean = false;
 
   constructor(
     private pedidoVentaService: PedidoVentaService,
@@ -23,7 +23,8 @@ export class ListaPedidoVenta implements OnInit {
     private activatedRoute: ActivatedRoute,
     private clienteService: ClienteService,
     private pedidoVentaDetalleService: DetallePedidoVentaService,
-    private domicilioservice: DomicilioService
+    private domicilioservice: DomicilioService,
+    private singletonService: SingletonService
   ) { }
 
   ngOnInit() {
@@ -35,8 +36,11 @@ export class ListaPedidoVenta implements OnInit {
           let idCliente = parametros.array[0];
           this.clienteService.getClienteById(idCliente)
             .subscribe((cliente: Cliente) => {
+              this.sinConexion = false;
               this.cliente = cliente;
               this.listarPedidosVentaPorId(this.cliente.idcliente);
+            }, () => {
+              this.listarPedidosVentaPorId(idCliente);
             })
         }
       })
@@ -46,6 +50,13 @@ export class ListaPedidoVenta implements OnInit {
     this.pedidoVentaService.getAll({ where: { idcliente: id } })
       .subscribe((pedidoVentas: Pedidoventa[]) => {
         this.listaPedidoVenta = pedidoVentas;
+        if (this.singletonService.isMobile) {
+          localStorage.removeItem("pedidosVenta")
+          localStorage.setItem("pedidosVenta", JSON.stringify(pedidoVentas))
+        }
+      }, (e) => {
+        this.sinConexion = true;
+        this.listaPedidoVenta = JSON.parse(localStorage.getItem("pedidosVenta"))
       })
 
   }
@@ -61,12 +72,12 @@ export class ListaPedidoVenta implements OnInit {
 
       this.pedidoVentaDetalleService.getAll({ where: { idpedidoventa: this.pedidoVenta.idpedidoventa } })
         .subscribe((listaPedidoVentaDetalle: Pedidoventadetalle[]) => {
-          this.arrayObservable = new Array<Observable<any>>();
+          let arrayObservable: Array<Observable<any>> = new Array<Observable<any>>();
           listaPedidoVentaDetalle.forEach(pedidoVenta => {
-            this.arrayObservable.push(this.pedidoVentaDetalleService.delete(pedidoVenta));
+            arrayObservable.push(this.pedidoVentaDetalleService.delete(pedidoVenta));
           });
-          Observable.merge(this.arrayObservable)
-            .subscribe(response => {
+          Observable.forkJoin(arrayObservable)
+            .subscribe((res: any[]) => {
               this.pedidoVentaService.delete(this.pedidoVenta)
                 .subscribe(() => {
                   this.domicilioservice.delete(this.pedidoVenta.iddomicilio)
@@ -97,5 +108,28 @@ export class ListaPedidoVenta implements OnInit {
 
   volver() {
     this.router.navigate(['listaClientes']);
+  }
+
+  sincronizar() {
+    if (localStorage.getItem("pedidoVenta2") && localStorage.getItem("pedidoVenta2").length > 2) {
+      let pedidoVenta2: Pedidoventa = JSON.parse(localStorage.getItem("pedidoVenta2"));
+      let domicilio: Domicilio = JSON.parse(localStorage.getItem("domicilio"));
+      this.domicilioservice.create(domicilio)
+        .flatMap((domicilioNuevo: Domicilio) => {
+          pedidoVenta2.iddomicilio = domicilioNuevo.iddomicilio;
+          pedidoVenta2.idcliente = this.cliente.idcliente;
+          console.log(pedidoVenta2)
+          return this.pedidoVentaService.create(pedidoVenta2)
+        })
+        .subscribe((pedidoventaNuevo: Pedidoventa) => {
+          localStorage.removeItem("domicilio");
+          localStorage.removeItem("pedidoVenta2");
+          this.listarPedidosVentaPorId(this.cliente.idcliente);
+        }, (e) => {
+          alert("No hay conexion!");
+        })
+    } else {
+      alert("No hay datos para sincronizar!");
+    }
   }
 }

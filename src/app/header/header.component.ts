@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SingletonService } from '../shared/services';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
     currentUser:any;
     constructor() {
-        this.currentUser = {firstName:'Jorge',apellido:'DAngelo'};
     }
 
     ngOnInit() {
+    }
+
+    cerrarSesion() {
+      
     }
 }

@@ -108,7 +108,7 @@
         <div class="col-md-6">
             <div class="form-group">
               <label for="gastoenvio">Gasto de envio</label>
-              <input formControlName="gastoenvio" type="number" id="gastoenvio" class="form-control" [(ngModel)]="gastoenvioAux">
+              <input formControlName="gastoenvio" type="number" id="gastoenvio" class="form-control" [(ngModel)]="pedidoVenta.gastosenvio">
               <div *ngIf="formularioPedidoVenta.get('gastoenvio').errors && formularioPedidoVenta.get('gastoenvio').dirty" class="alert alert-danger">
                 <p *ngIf="formularioPedidoVenta.get('gastoenvio').hasError('required')">Este campo es obligatorio</p>
                 <p *ngIf="formularioPedidoVenta.get('gastoenvio').hasError('pattern')">Ingrese un gasto de envio válido</p>

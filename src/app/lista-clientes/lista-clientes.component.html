@@ -12,13 +12,18 @@
       scrollable="true" scrollHeight="450px" columnResizeMode="expand" [(selection)]="cliente" (onRowUnselect)="onRowUnselect($event)"
       (onRowSelect)="onRowSelect($event)" [paginator]="true" rows="15" [responsive]="true">
 
-      <p-header>
+      <p-header *ngIf="!singletonService.isMobile">
         <div class="ui-helper-clearfix" style="width:100%">
           <button type="button" pButton icon="fa-plus" style="float:left" (click)="agregar()" label="Nuevo"></button>
           <button type="button" pButton icon="fa-edit" style="float:left" (click)="editar()" label="Modificar"></button>
           <button type="button" pButton icon="fa-remove" style="float:left" (click)="delete()" label="Eliminar"></button>
           <button type="button" pButton icon="fa-file-text-o" style="float:right" (click)="pedidoVenta()" label="Pedido de ventas"></button>
 
+        </div>
+      </p-header>
+      <p-header *ngIf="singletonService.isMobile">
+        <div class="ui-helper-clearfix" style="width:100%">
+          <button type="button" pButton icon="fa-file-text-o" style="float:left" (click)="pedidoVenta()" label="Pedido de ventas"></button>
         </div>
       </p-header>
 

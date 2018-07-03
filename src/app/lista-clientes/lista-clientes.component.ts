@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ClienteService, Cliente, PedidoVentaService, Pedidoventa } from '../shared/services/index';
+import { ClienteService, Cliente, PedidoVentaService, Pedidoventa, SingletonService } from '../shared/services/index';
 
 @Component({
   selector: 'app-lista-clientes',
@@ -13,9 +13,10 @@ export class ListaClientes implements OnInit {
   cliente: Cliente = new Cliente();
 
   constructor(
+    private singletonService: SingletonService,
     private clienteService: ClienteService,
     private pedidoventaService: PedidoVentaService,
-    private router: Router
+    private router: Router,
 
   ) { }
 
@@ -26,7 +27,13 @@ export class ListaClientes implements OnInit {
   private recargarListaClientes() {
     this.clienteService.getAll()
       .subscribe((clientes: Cliente[]) => {
-        this.listaCliente = clientes
+        this.listaCliente = clientes;
+        if (this.singletonService.isMobile) {
+          localStorage.removeItem("clientes")
+          localStorage.setItem("clientes", JSON.stringify(clientes))
+        }
+      }, (e)=> {
+        this.listaCliente = JSON.parse( localStorage.getItem("clientes") )
       })
   }
 
